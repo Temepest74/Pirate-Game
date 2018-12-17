@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Island
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Island
+  - Unwalkable
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Water
+    uniqueID: 1642430023
+    locked: 0
+  - name: WaterShape
+    uniqueID: 925818147
+    locked: 0
+  - name: Islands
+    uniqueID: 3742962769
+    locked: 0
+  - name: SpawnPoints
+    uniqueID: 1897739253
+    locked: 0
+  - name: Decorations
+    uniqueID: 822421975
+    locked: 0
+  - name: Ship
+    uniqueID: 1001070607
+    locked: 0
