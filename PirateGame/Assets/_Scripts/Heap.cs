@@ -21,6 +21,70 @@ public class Heap<T> where T : IHeapItem<T>{
         currentItemCount++;
     }
 
+    public T RemoveFirst()
+    {
+        T firstItem = items[0];
+        currentItemCount--;
+        items[0] = items[currentItemCount];//check it
+        items[0].HeapIndex = 0;
+        SortDown(items[0]);
+        return firstItem;
+    }
+
+    public bool Contains(T item)
+    {
+        return Equals(items[item.HeapIndex], item);
+    }
+
+    public void UpdateItem(T item)
+    {
+        SortUp(item);//you should check it and add sortDown if is need in another tipe of pathfinding
+    }
+
+    public int Count
+    {
+        get
+        {
+            return currentItemCount;
+        }
+    }
+
+    void SortDown(T item)
+    {
+        while(true)
+        {
+            int childIndexLeft = item.HeapIndex * 2 + 1;
+            int childIndexRight = item.HeapIndex * 2 + 2;
+            int swapIndex = 0;
+
+            if(childIndexLeft < currentItemCount)
+            {
+                swapIndex = childIndexLeft;
+
+                if(childIndexRight < currentItemCount)
+                {
+                    if(items[childIndexLeft].CompareTo(items[childIndexRight]) < 0)
+                    {
+                        swapIndex = childIndexRight;
+                    }
+                }
+                if (item.CompareTo(items[swapIndex]) < 0)
+                {
+                    Swap(item, items[swapIndex]);
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else
+            {
+                return;
+            }
+
+        }
+    }
+
     void SortUp(T item)
     {
         int parentIndex = (item.HeapIndex - 1) / 2;
