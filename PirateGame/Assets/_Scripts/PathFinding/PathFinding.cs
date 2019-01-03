@@ -27,7 +27,7 @@
                         continue;
                     }
 
-                    int newMovementCostToNeighbour = currentNode.gCost + GetDistance(currentNode, neighbourd);
+                    int newMovementCostToNeighbour = currentNode.gCost + GetDistance(currentNode, neighbourd) + neighbourd.movementPenalty;
                     if (newMovementCostToNeighbour < neighbourd.gCost || !openSet.Contains(neighbourd))
                     {
                         neighbourd.gCost = newMovementCostToNeighbour;
@@ -38,7 +38,7 @@
                         if (!openSet.Contains(neighbourd))
                         {
                             openSet.Add(neighbourd);
-                        }
+                        }else
                         openSet.UpdateItem(neighbourd);
                     }
                 }
