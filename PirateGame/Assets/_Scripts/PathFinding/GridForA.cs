@@ -50,19 +50,18 @@ public class GridForA : MonoBehaviour {
             {
                 Vector3 worldPoint = worldButtomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.up * (y * nodeDiameter + nodeRadius);
                 bool walkable = !(Physics2D.OverlapCircle(worldPoint, nodeRadius, unwalkableMask));
-
                 int movementPenalty = 0;
-
-                if(walkable)
+                if (walkable)
                 {
-                    Ray ray = new Ray(worldPoint + Vector3.up * 50, Vector3.down);
-                    RaycastHit hit;
-                    if(Physics.Raycast(ray,out hit, 100, walkableMask))
+                    Vector3 rayOrigin = worldPoint;
+                    Ray2D ray = new Ray2D(new Vector2(rayOrigin.x, rayOrigin.y), new Vector2(0, 0.5f));
+                    RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, walkableMask);
+                    //pentru a merge raycast ai nevoie de un collider neaparat
+                    if (hit)
                     {
                         walkableRegionsDictionary.TryGetValue(hit.collider.gameObject.layer, out movementPenalty);
                     }
                 }
-
                 grid[x, y] = new Node(walkable, worldPoint, x, y, movementPenalty);
             }
         }
