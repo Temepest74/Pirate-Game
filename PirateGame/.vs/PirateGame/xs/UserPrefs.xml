@@ -3,8 +3,8 @@
     <Files>
       <File FileName="Assets/_Scripts/PathFinding/Node.cs" Line="27" Column="9" />
       <File FileName="Assets/_Scripts/PathFinding/PathFinding.cs" Line="32" Column="1" />
-      <File FileName="Assets/_Scripts/PathFinding/GridForA.cs" Line="59" Column="79" />
-      <File FileName="Assets/_Scripts/PathFinding/Unit.cs" Line="1" Column="1" />
+      <File FileName="Assets/_Scripts/PathFinding/GridForA.cs" Line="114" Column="14" />
+      <File FileName="Assets/_Scripts/PathFinding/Unit.cs" Line="8" Column="20" />
       <File FileName="Assets/_Scripts/PathFinding/PathRequestManager.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
