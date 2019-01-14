@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb2D.AddRelativeForce(Vector2.up * speed * -vertical);
+        rb2D.AddRelativeForce(Vector2.up * speed * -vertical * Time.deltaTime);
         transform.Rotate(0.0f, 0.0f, -horizontal * rotationSpeed);
         if (vertical == 0.0f)
         {
