@@ -1,11 +1,8 @@
 ﻿<Properties StartupConfiguration="{0658773C-97AB-F51B-8991-5EC830C7A4F9}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_Scripts/PathFinding/Unit.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_Scripts/Spawning/RandomSpawner.cs">
     <Files>
-      <File FileName="Assets/_Scripts/PathFinding/Unit.cs" Line="64" Column="19" />
-      <File FileName="Assets/_Scripts/PathFinding/Line.cs" Line="59" Column="1" />
-      <File FileName="Assets/_Scripts/PathFinding/Path.cs" Line="46" Column="34" />
-      <File FileName="Assets/_Scripts/Player/PlayerMovement.cs" Line="30" Column="9" />
-      <File FileName="Assets/_Scripts/PathFinding/GridForA.cs" Line="16" Column="1" />
+      <File FileName="Assets/_Scripts/Spawning/RandomSpawner.cs" Line="55" Column="84" />
+      <File FileName="Library/PackageCache/com.unity.cinemachine@2.2.7/Runtime/Behaviours/CinemachineVirtualCamera.cs" Line="7" Column="22" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

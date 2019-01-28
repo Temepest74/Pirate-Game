@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Island
+  - Border
+  - Enemy
+  - ChinematicCamera
   layers:
   - Default
   - TransparentFX
@@ -51,12 +54,12 @@ TagManager:
   - name: Islands
     uniqueID: 3742962769
     locked: 0
-  - name: SpawnPoints
-    uniqueID: 1897739253
-    locked: 0
   - name: Decorations
     uniqueID: 822421975
     locked: 0
   - name: Ship
     uniqueID: 1001070607
+    locked: 0
+  - name: SpawnPoints
+    uniqueID: 1897739253
     locked: 0

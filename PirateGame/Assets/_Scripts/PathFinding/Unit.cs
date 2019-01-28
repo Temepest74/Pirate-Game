@@ -4,55 +4,83 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour {
 
+    const float minPathUpdateTime = .2f;
+    const float pathUpdateMoveTreshhold = .4f;
+
     public Transform target;
     public float speed = 5;
     public float turnDst = 2.5f;
     public float turnSpeed = 0.5f;
+    public float stoppingDistance = 10;
+    public float noMoreMovementDistance;
 
     Path path;
     Rigidbody2D rb2D;
+
+    [HideInInspector]
+    public float angleDifferenceToTarget;
+    public float angleDifferenceToTargetTreshhold;
 
     private void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();
     }
 
-    private void Start()// change this Start() with Update() or anything else when the tutorial has been done
+    private void Start()
     {
-        PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+        //set target
+        StartCoroutine(UpdatePath());
     }
 
     public void OnPathFound(Vector3[] waipoints, bool pathSuccesful)
     {
         if(pathSuccesful)
         {
-            path = new Path(waipoints, transform.position, turnDst);
+            path = new Path(waipoints, transform.position, turnDst, stoppingDistance);
             StopCoroutine("FollowPath");
             StartCoroutine("FollowPath");
         }
     }
 
+    IEnumerator UpdatePath()
+    {
+        if(Time.timeSinceLevelLoad < .3f)
+        {
+            yield return new WaitForSeconds(.3f);
+        }
+        PathRequestManager.RequestPath(new PathRequest(transform.position, target.position, OnPathFound));
+        float sqrtMoveTreshhold = pathUpdateMoveTreshhold * pathUpdateMoveTreshhold;
+        Vector3 targetPosOld = target.position;
+
+        while(true)
+        {
+            yield return new WaitForSeconds(minPathUpdateTime);
+            if ((target.position - targetPosOld).sqrMagnitude > sqrtMoveTreshhold)
+            {
+                PathRequestManager.RequestPath(new PathRequest(transform.position, target.position, OnPathFound));
+                targetPosOld = target.position;
+            }
+        }
+    }
+
     IEnumerator FollowPath()
     {
-        //this line of code are for 3d, i wil comment them and add the 2d ones after ep 10
         bool followingPath = true;
         int pathIndex = 0;
         RotatingThePlayer(path.lookPoints[pathIndex]);
-        Debug.Log(followingPath);
+
+        float speedPercent = 1f;
 
         while (followingPath)
         {
-            Debug.Log("is in following path");
             Vector2 pos2D = new Vector2(transform.position.x, transform.position.y);
-            Debug.Log(pathIndex);
-            if(path.turnBoundaries[pathIndex].HasCrossedLine(pos2D))
+            while(path.turnBoundaries[pathIndex].HasCrossedLine(pos2D))
             {
-                Debug.Log(path.finishLineIndex);
                 if (pathIndex == path.finishLineIndex)
                 {
                     followingPath = false;
-                }
-                else
+                    break;
+                }else
                 {
                     pathIndex++;
                 }
@@ -60,8 +88,19 @@ public class Unit : MonoBehaviour {
 
             if (followingPath)
             {
+                if (pathIndex >= path.slowDownIndex && stoppingDistance > 0)
+                {
+                    speedPercent = Mathf.Clamp01(path.turnBoundaries[path.finishLineIndex].DistanceFromPoint(pos2D) / stoppingDistance);
+                    if(speedPercent < .01f)
+                    {
+                        followingPath = false;
+                    }
+                }
                 RotatingThePlayer(path.lookPoints[pathIndex]);
-                //transform.Translate(Vector3.up * speed * Time.deltaTime, Space.Self);
+                if (Mathf.Abs(angleDifferenceToTarget) < angleDifferenceToTargetTreshhold && (target.position - transform.position).sqrMagnitude > noMoreMovementDistance * noMoreMovementDistance)
+                {
+                    transform.Translate(Vector3.up * speed * Time.deltaTime * speedPercent, Space.Self);//change it when ballancing the game
+                }
             }
             yield return null;
         }
@@ -78,20 +117,13 @@ public class Unit : MonoBehaviour {
     protected virtual void RotatingThePlayer(Vector3 target)
     {
         Vector3 direction = target - transform.position;
-
-        float angleDifferenceToTarget = Vector2.SignedAngle(transform.up, direction);
-
+        angleDifferenceToTarget = Vector2.SignedAngle(transform.up, direction);
         //Flattens difference to -1f/1f * delta * turn rate
         float rotationChange = Mathf.Sign(angleDifferenceToTarget) * Time.deltaTime * turnSpeed;
-
-        //Todo: Cleanup/rework this temporary shake mitigation code
-        /*if (Mathf.Abs(rotationChange) > Mathf.Abs(angleDifferenceToTarget)) rotationChange = angleDifferenceToTarget;
-        if ((Mathf.Abs(angleDifferenceToTarget) - Mathf.Abs(rotationChange)).IsWithinRange(0, .01f)) rotationChange = 0;*/
 
         //Apply rotation
         Vector3 localEulerAngles = transform.localEulerAngles;
         localEulerAngles.z += rotationChange;
-        //localEulerAngles.z = Mathf.Clamp(localEulerAngles.z.TauToPi() + rotationChange, -weapon.maxAngle, weapon.maxAngle);
         localEulerAngles.Set(0, 0, localEulerAngles.z);
         transform.localEulerAngles = localEulerAngles;
     }
