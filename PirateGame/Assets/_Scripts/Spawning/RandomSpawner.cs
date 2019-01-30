@@ -5,6 +5,7 @@ using System.Linq;
 
 public class RandomSpawner : MonoBehaviour
 {
+
     public GameObject[] spawnPoints;
     public GameObject[] prefabSpawnPoints;
     public GameObject[] prefabEnemyShips;
@@ -19,8 +20,9 @@ public class RandomSpawner : MonoBehaviour
 
     private void Start()
     {
+        bool instantiatePlayer = (shipType == ShipType.Random);
         takenSpawnPoints = new Queue<GameObject>();
-        foreach (GameObject spawnPoint in spawnPoints)
+        for(int i = 0; i < spawnPoints.Length; i++)
         {
             while (true)
             {
@@ -28,13 +30,41 @@ public class RandomSpawner : MonoBehaviour
                 if(!takenSpawnPoints.Contains(prefabSpawnPoints[rn]))
                 {
                     takenSpawnPoints.Enqueue(prefabSpawnPoints[rn]);
-                    Instantiate(prefabSpawnPoints[rn], spawnPoint.transform.position, Quaternion.identity);
+                    if (i != 0 || instantiatePlayer)
+                    {
+                        Instantiate(prefabSpawnPoints[rn], spawnPoints[i].transform.position, Quaternion.identity);
+                    }
                     break;
                 }
             }
         }
-        bool instantiatePlayer = (shipType == ShipType.Random);
         int currentNoOfShips = 0;
+        if(!instantiatePlayer)// if someone chose the class type
+        {
+            int i;
+            for (i = 0; i < prefabPlayerShips.Length; i++)
+            {
+                string firstWord = prefabPlayerShips[i].name.IndexOf(" ", System.StringComparison.Ordinal) > -1 ? prefabPlayerShips[i].name.Substring(0, prefabPlayerShips[i].name.IndexOf(" ", System.StringComparison.Ordinal)) : prefabPlayerShips[i].name;
+                if (shipType.ToString() == firstWord)
+                {
+                    break;
+                }
+            }
+            int j;
+            for(j = 0; j < prefabSpawnPoints.Length; j++)
+            {
+                if(prefabSpawnPoints[j].name == prefabPlayerShips[i].name)
+                {
+                    break;
+                }
+            }
+            Debug.Log(i +" " + j + "--------" + prefabSpawnPoints[j]);
+            Instantiate(prefabSpawnPoints[j], spawnPoints[0].transform.position, Quaternion.identity);
+            takenSpawnPoints.Dequeue();
+            GameObject gm = Instantiate(prefabPlayerShips[i], spawnPoints[0].transform.position, Quaternion.identity);
+            currentNoOfShips++;
+            GameObject.FindWithTag("ChinematicCamera").GetComponent<Cinemachine.CinemachineVirtualCamera>().m_Follow = gm.transform;
+        }
         while (takenSpawnPoints.Count != 0)
         {
             GameObject toInstantiateSpawnPoint;
@@ -50,9 +80,9 @@ public class RandomSpawner : MonoBehaviour
                         break;
                     }
                 }
-                Instantiate(prefabPlayerShips[i], spawnPoints[0].transform.position, Quaternion.identity);
+                GameObject gm = Instantiate(prefabPlayerShips[i], spawnPoints[0].transform.position, Quaternion.identity);
                 currentNoOfShips++;
-                GameObject.FindWithTag("ChinematicCamera").GetComponent<Cinemachine>().
+                GameObject.FindWithTag("ChinematicCamera").GetComponent<Cinemachine.CinemachineVirtualCamera>().m_Follow = gm.transform;
             }
             else
             {
