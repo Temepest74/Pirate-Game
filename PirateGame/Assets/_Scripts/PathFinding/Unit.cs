@@ -28,7 +28,7 @@ public class Unit : MonoBehaviour {
 
     private void Start()
     {
-        //set target
+        StartCoroutine(SetTarget());
         StartCoroutine(UpdatePath());
     }
 
@@ -119,12 +119,57 @@ public class Unit : MonoBehaviour {
         Vector3 direction = target - transform.position;
         angleDifferenceToTarget = Vector2.SignedAngle(transform.up, direction);
         //Flattens difference to -1f/1f * delta * turn rate
-        float rotationChange = Mathf.Sign(angleDifferenceToTarget) * Time.deltaTime * turnSpeed;
+        if (angleDifferenceToTarget < -1 || angleDifferenceToTarget > 1)
+        {
+            float rotationChange = Mathf.Sign(angleDifferenceToTarget) * Time.deltaTime * turnSpeed;
+            //Apply rotation
+            Vector3 localEulerAngles = transform.localEulerAngles;
+            localEulerAngles.z += rotationChange;
+            localEulerAngles.Set(0, 0, localEulerAngles.z);
+            transform.localEulerAngles = localEulerAngles;
+        }
+    }
 
-        //Apply rotation
-        Vector3 localEulerAngles = transform.localEulerAngles;
-        localEulerAngles.z += rotationChange;
-        localEulerAngles.Set(0, 0, localEulerAngles.z);
-        transform.localEulerAngles = localEulerAngles;
+    private IEnumerator SetTarget()
+    {
+        while (true)
+        {
+            GameObject[] targets = GameObject.FindGameObjectsWithTag("Enemy");
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            Dictionary<GameObject, float> sqrtDistances = new Dictionary<GameObject, float>();
+            if (GetDistance(player) > pathUpdateMoveTreshhold)
+            {
+                sqrtDistances.Add(player, GetDistance(player));
+            }
+            for (int i = 0; i < targets.Length; i++)
+            {
+                if (GetDistance(targets[i]) > pathUpdateMoveTreshhold)
+                {
+                    sqrtDistances.Add(targets[i], GetDistance(targets[i]));
+                }
+            }
+            float minDist;
+            target = player.transform;
+            sqrtDistances.TryGetValue(player, out minDist);
+            for (int i = 0; i < targets.Length; i++)// verific ce nu trebuie
+            {
+                float dist = Mathf.Infinity;
+                if (sqrtDistances.ContainsKey(targets[i]))
+                {
+                    sqrtDistances.TryGetValue(targets[i], out dist);
+                }
+                if (minDist > dist)
+                {
+                    minDist = dist;
+                    target = targets[i].transform;
+                }
+            }
+            yield return new WaitForSeconds(2);
+        }
+    }
+
+    private float GetDistance(GameObject obj)
+    {
+        return Mathf.Abs((transform.position - obj.transform.position).sqrMagnitude);
     }
 }

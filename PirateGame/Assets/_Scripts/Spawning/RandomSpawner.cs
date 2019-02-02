@@ -20,6 +20,13 @@ public class RandomSpawner : MonoBehaviour
 
     private void Start()
     {
+        for(int i = 0; i < spawnPoints.Length; i++)
+        {
+            int rn = Random.Range(0, spawnPoints.Length - 1);
+            var tmpry = spawnPoints[i];
+            spawnPoints[i] = spawnPoints[rn];
+            spawnPoints[rn] = tmpry; 
+        }
         bool instantiatePlayer = (shipType == ShipType.Random);
         takenSpawnPoints = new Queue<GameObject>();
         for(int i = 0; i < spawnPoints.Length; i++)
@@ -58,7 +65,6 @@ public class RandomSpawner : MonoBehaviour
                     break;
                 }
             }
-            Debug.Log(i +" " + j + "--------" + prefabSpawnPoints[j]);
             Instantiate(prefabSpawnPoints[j], spawnPoints[0].transform.position, Quaternion.identity);
             takenSpawnPoints.Dequeue();
             GameObject gm = Instantiate(prefabPlayerShips[i], spawnPoints[0].transform.position, Quaternion.identity);
