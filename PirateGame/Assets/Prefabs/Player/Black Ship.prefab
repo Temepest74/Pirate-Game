@@ -61,5 +61,26 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 16e947657442b4a979f1b705a4dcb93a,
         type: 3}
+    - target: {fileID: 4465004063329337392, guid: a976041e619c04c8a8eb35b799b61c02,
+        type: 3}
+      propertyPath: boatStats
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4465004063329337392, guid: a976041e619c04c8a8eb35b799b61c02,
+        type: 3}
+      propertyPath: boatStats.ultimateImage
+      value: 
+      objectReference: {fileID: 21300010, guid: da5f79080add34f479e55c786429b26f,
+        type: 3}
+    - target: {fileID: 4465004063329337392, guid: a976041e619c04c8a8eb35b799b61c02,
+        type: 3}
+      propertyPath: boatStats.isDead
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2465620485030810666, guid: a976041e619c04c8a8eb35b799b61c02,
+        type: 3}
+      propertyPath: boatStats.ultimateDescription
+      value: Double the attack speed
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a976041e619c04c8a8eb35b799b61c02, type: 3}

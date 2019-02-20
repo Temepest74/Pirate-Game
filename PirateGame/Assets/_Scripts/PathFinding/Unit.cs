@@ -106,13 +106,13 @@ public class Unit : MonoBehaviour {
         }
     }
 
-    public void OnDrawGizmos()
+    /*public void OnDrawGizmos()
     {
         if(path!=null)
         {
             path.DrawWithGizmos();
         }
-    }
+    }*/
 
     protected virtual void RotatingThePlayer(Vector3 target)
     {

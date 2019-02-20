@@ -8,6 +8,7 @@ TagManager:
   - Border
   - Enemy
   - ChinematicCamera
+  - UltimateImageHolder
   layers:
   - Default
   - TransparentFX

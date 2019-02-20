@@ -22,7 +22,7 @@ public class RandomSpawner : MonoBehaviour
     {
         for(int i = 0; i < spawnPoints.Length; i++)
         {
-            int rn = Random.Range(0, spawnPoints.Length - 1);
+            int rn = Random.Range(0, spawnPoints.Length );
             var tmpry = spawnPoints[i];
             spawnPoints[i] = spawnPoints[rn];
             spawnPoints[rn] = tmpry; 
