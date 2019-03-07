@@ -807,7 +807,7 @@ MonoBehaviour:
   - {fileID: 7402682542647009758, guid: 8c10eed4d438d4d5a95197ff20b483ed, type: 3}
   - {fileID: 1573309792391360, guid: a976041e619c04c8a8eb35b799b61c02, type: 3}
   - {fileID: 110491583858268443, guid: e8afcac891fce42d392ff13d6b31a943, type: 3}
-  shipType: 6
+  shipType: 0
 --- !u!4 &1153583493
 Transform:
   m_ObjectHideFlags: 0

@@ -73,5 +73,34 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 82900fc0676d14d4fa5a2d304a1779a0,
         type: 3}
+    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
+        type: 3}
+      propertyPath: damageShipSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: f3f9d9c0491cb48c1a6bd93512164cea,
+        type: 3}
+    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
+        type: 3}
+      propertyPath: damageShipSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 51500381e81434894a8ade60f3eb8b0c,
+        type: 3}
+    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
+        type: 3}
+      propertyPath: damageShipSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 82900fc0676d14d4fa5a2d304a1779a0,
+        type: 3}
+    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
+        type: 3}
+      propertyPath: deadSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 865e38416a20b42d3acf59844ddfdebe,
+        type: 3}
+    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
+        type: 3}
+      propertyPath: ultimateDescription
+      value: Repair 30 percent of your max health
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78c3155fb879e4d33a43a4692a9b46d6, type: 3}

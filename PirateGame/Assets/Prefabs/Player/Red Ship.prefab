@@ -61,12 +61,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: acf0a02b4d0d444c7b4e74b7d30b85e9,
         type: 3}
-    - target: {fileID: 4465004063329337392, guid: a976041e619c04c8a8eb35b799b61c02,
-        type: 3}
-      propertyPath: boatStats.ultimateImage
-      value: 
-      objectReference: {fileID: 21300008, guid: da5f79080add34f479e55c786429b26f,
-        type: 3}
     - target: {fileID: 2465620485030810666, guid: a976041e619c04c8a8eb35b799b61c02,
         type: 3}
       propertyPath: boatStats.ultimateImage
@@ -78,5 +72,46 @@ PrefabInstance:
       propertyPath: boatStats.ultimateDescription
       value: Give AOE Damage worth 70% procent
       objectReference: {fileID: 0}
+    - target: {fileID: 2465620485030810666, guid: a976041e619c04c8a8eb35b799b61c02,
+        type: 3}
+      propertyPath: ultimateImage
+      value: 
+      objectReference: {fileID: 21300008, guid: da5f79080add34f479e55c786429b26f,
+        type: 3}
+    - target: {fileID: 2465620485030810666, guid: a976041e619c04c8a8eb35b799b61c02,
+        type: 3}
+      propertyPath: ultimateDescription
+      value: Give AOE Damage worth 70% procent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2465620485030810666, guid: a976041e619c04c8a8eb35b799b61c02,
+        type: 3}
+      propertyPath: damageShipSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 620355ccd27224f92a85a3ebe56aae4f,
+        type: 3}
+    - target: {fileID: 2465620485030810666, guid: a976041e619c04c8a8eb35b799b61c02,
+        type: 3}
+      propertyPath: damageShipSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: daca1debdda584ccf9721cd4a29050d9,
+        type: 3}
+    - target: {fileID: 2465620485030810666, guid: a976041e619c04c8a8eb35b799b61c02,
+        type: 3}
+      propertyPath: damageShipSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: acf0a02b4d0d444c7b4e74b7d30b85e9,
+        type: 3}
+    - target: {fileID: 2465620485030810666, guid: a976041e619c04c8a8eb35b799b61c02,
+        type: 3}
+      propertyPath: deadSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7fa8dfa1fdc0740d6b6d5400a001112c,
+        type: 3}
+    - target: {fileID: 4465004063329337392, guid: a976041e619c04c8a8eb35b799b61c02,
+        type: 3}
+      propertyPath: boatStats.ultimateImage
+      value: 
+      objectReference: {fileID: 21300008, guid: da5f79080add34f479e55c786429b26f,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a976041e619c04c8a8eb35b799b61c02, type: 3}

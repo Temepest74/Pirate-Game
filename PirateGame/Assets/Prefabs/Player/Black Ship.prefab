@@ -61,6 +61,51 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 16e947657442b4a979f1b705a4dcb93a,
         type: 3}
+    - target: {fileID: 2465620485030810666, guid: a976041e619c04c8a8eb35b799b61c02,
+        type: 3}
+      propertyPath: boatStats.ultimateDescription
+      value: Double the attack speed
+      objectReference: {fileID: 0}
+    - target: {fileID: 2465620485030810666, guid: a976041e619c04c8a8eb35b799b61c02,
+        type: 3}
+      propertyPath: ultimateImage
+      value: 
+      objectReference: {fileID: 21300010, guid: da5f79080add34f479e55c786429b26f,
+        type: 3}
+    - target: {fileID: 2465620485030810666, guid: a976041e619c04c8a8eb35b799b61c02,
+        type: 3}
+      propertyPath: ultimateDescription
+      value: Stealth 3 second
+      objectReference: {fileID: 0}
+    - target: {fileID: 2465620485030810666, guid: a976041e619c04c8a8eb35b799b61c02,
+        type: 3}
+      propertyPath: damageShipSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: f589c256bd17146d2bced69e24c394ad,
+        type: 3}
+    - target: {fileID: 2465620485030810666, guid: a976041e619c04c8a8eb35b799b61c02,
+        type: 3}
+      propertyPath: damageShipSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 78e396bf529eb4549b79e83499ba2f7b,
+        type: 3}
+    - target: {fileID: 2465620485030810666, guid: a976041e619c04c8a8eb35b799b61c02,
+        type: 3}
+      propertyPath: damageShipSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 16e947657442b4a979f1b705a4dcb93a,
+        type: 3}
+    - target: {fileID: 2465620485030810666, guid: a976041e619c04c8a8eb35b799b61c02,
+        type: 3}
+      propertyPath: deadSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d5689546e57cc4371b946b647fc886f8,
+        type: 3}
+    - target: {fileID: 2465620485030810666, guid: a976041e619c04c8a8eb35b799b61c02,
+        type: 3}
+      propertyPath: currentHealth
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4465004063329337392, guid: a976041e619c04c8a8eb35b799b61c02,
         type: 3}
       propertyPath: boatStats
@@ -76,11 +121,6 @@ PrefabInstance:
         type: 3}
       propertyPath: boatStats.isDead
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2465620485030810666, guid: a976041e619c04c8a8eb35b799b61c02,
-        type: 3}
-      propertyPath: boatStats.ultimateDescription
-      value: Double the attack speed
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a976041e619c04c8a8eb35b799b61c02, type: 3}

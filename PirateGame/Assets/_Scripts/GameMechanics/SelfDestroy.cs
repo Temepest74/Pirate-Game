@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class SelfDestroy : MonoBehaviour
 {
-    public float destroyTime;
+    public float destroyTime = 3f;
     void Start()
     {
-        GameObject.Destroy(gameObject, destroyTime);
+        Destroy(gameObject, destroyTime);
+    }
+    public void DestroyNow()
+    {
+        Destroy(gameObject);
     }
 }

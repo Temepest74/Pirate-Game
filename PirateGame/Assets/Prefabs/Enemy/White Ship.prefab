@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 515780444385694792}
   - component: {fileID: 515780444385694794}
   - component: {fileID: 515780444385694799}
+  - component: {fileID: 1282450668570048858}
   m_Layer: 0
   m_Name: White Ship
   m_TagString: Enemy
@@ -152,3 +153,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b810121c12384679b6fe11c722b9324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1282450668570048858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515780444385694789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cab04de56c964d69ac07932b13220c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  maxHealth: 10
+  currentHealth: 10
+  attackSpeed: 1
+  damage: 2
+  ultimateCD: 10
+  ultimateDescription: Increase the maximum health with 60 percent
+  isDead: 1
+  isEliminated: 0
+  projectile: {fileID: 1967866206798720496, guid: b08817b56bbf944bca78bb6a8a1d0db7,
+    type: 3}
+  damageShipSprites:
+  - {fileID: 21300000, guid: c1a91459e01634ef58920e7d03324a06, type: 3}
+  - {fileID: 21300000, guid: 49b2d0999b9424414a1cc083931a28c5, type: 3}
+  - {fileID: 21300000, guid: 257ff02a55cdb4c35b9c082c8ba4d1a9, type: 3}
+  deadSprite: {fileID: 21300000, guid: bb20b7ca1da3b44418d945fd7eee210b, type: 3}

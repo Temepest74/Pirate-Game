@@ -73,5 +73,34 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: acf0a02b4d0d444c7b4e74b7d30b85e9,
         type: 3}
+    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
+        type: 3}
+      propertyPath: damageShipSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 620355ccd27224f92a85a3ebe56aae4f,
+        type: 3}
+    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
+        type: 3}
+      propertyPath: damageShipSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: daca1debdda584ccf9721cd4a29050d9,
+        type: 3}
+    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
+        type: 3}
+      propertyPath: damageShipSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: acf0a02b4d0d444c7b4e74b7d30b85e9,
+        type: 3}
+    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
+        type: 3}
+      propertyPath: deadSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7fa8dfa1fdc0740d6b6d5400a001112c,
+        type: 3}
+    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
+        type: 3}
+      propertyPath: ultimateDescription
+      value: Give AOE Damage worth 70% procent
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78c3155fb879e4d33a43a4692a9b46d6, type: 3}
