@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+
 
 public class EnemyCombatController : MonoBehaviour
 {
@@ -31,12 +33,17 @@ public class EnemyCombatController : MonoBehaviour
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = damageShipSprites[(int)procentHealth];
         }
-        if (currentHealth == 0)
+        if (currentHealth <= 0)
         {
             isDead = true;
             gameObject.GetComponent<SpriteRenderer>().sprite = deadSprite;
-            gameObject.GetComponent<Unit>().enabled = false;
-            Destroy(gameObject, 2);
+            StartCoroutine(DisableObject(2f,() => gameObject.SetActive(false)));
         }
+    }
+
+    IEnumerator DisableObject(float seconds, Action action)
+    {
+        yield return new WaitForSeconds(seconds);
+        action.Invoke();
     }
 }

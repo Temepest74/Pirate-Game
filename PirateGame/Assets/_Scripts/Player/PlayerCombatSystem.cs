@@ -67,12 +67,11 @@ public class PlayerCombatSystem : MonoBehaviour
                 {
                     Vector3 dir = new Vector3(raycastHit2D.collider.transform.position.x - transform.position.x,
                     raycastHit2D.collider.transform.position.y - transform.position.y, 0);
-                    if (dir.sqrMagnitude < range * range)
+                    if (dir.sqrMagnitude < range * range && !raycastHit2D.collider.GetComponent<EnemyCombatController>().isDead)
                     {
                         GameObject obj = Instantiate(projectile, transform.position, Quaternion.identity) as GameObject;
                         obj.transform.up = dir;
                         obj.GetComponent<CannonballController>().shotter = gameObject;
-                        Debug.Log(obj.GetComponent<CannonballController>().shotter);
                     }
                     else
                     {

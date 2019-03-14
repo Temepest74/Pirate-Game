@@ -65,44 +65,51 @@ public class Unit : MonoBehaviour {
 
     IEnumerator FollowPath()
     {
-        bool followingPath = true;
-        int pathIndex = 0;
-        RotatingThePlayer(path.lookPoints[pathIndex]);
-
-        float speedPercent = 1f;
-
-        while (followingPath)
+        if (!gameObject.GetComponent<EnemyCombatController>().isDead)
         {
-            Vector2 pos2D = new Vector2(transform.position.x, transform.position.y);
-            while(path.turnBoundaries[pathIndex].HasCrossedLine(pos2D))
-            {
-                if (pathIndex == path.finishLineIndex)
-                {
-                    followingPath = false;
-                    break;
-                }else
-                {
-                    pathIndex++;
-                }
-            }
+            bool followingPath = true;
+            int pathIndex = 0;
+            RotatingThePlayer(path.lookPoints[pathIndex]);
 
-            if (followingPath)
+            float speedPercent = 1f;
+
+            while (followingPath)
             {
-                if (pathIndex >= path.slowDownIndex && stoppingDistance > 0)
+                Vector2 pos2D = new Vector2(transform.position.x, transform.position.y);
+                while (path.turnBoundaries[pathIndex].HasCrossedLine(pos2D))
                 {
-                    speedPercent = Mathf.Clamp01(path.turnBoundaries[path.finishLineIndex].DistanceFromPoint(pos2D) / stoppingDistance);
-                    if(speedPercent < .01f)
+                    if (pathIndex == path.finishLineIndex)
                     {
                         followingPath = false;
+                        break;
+                    }
+                    else
+                    {
+                        pathIndex++;
                     }
                 }
-                RotatingThePlayer(path.lookPoints[pathIndex]);
-                if (Mathf.Abs(angleDifferenceToTarget) < angleDifferenceToTargetTreshhold && (target.position - transform.position).sqrMagnitude > noMoreMovementDistance * noMoreMovementDistance)
+
+                if (followingPath)
                 {
-                    transform.Translate(Vector3.up * speed * Time.deltaTime * speedPercent, Space.Self);//change it when ballancing the game
+                    if (pathIndex >= path.slowDownIndex && stoppingDistance > 0)
+                    {
+                        speedPercent = Mathf.Clamp01(path.turnBoundaries[path.finishLineIndex].DistanceFromPoint(pos2D) / stoppingDistance);
+                        if (speedPercent < .01f)
+                        {
+                            followingPath = false;
+                        }
+                    }
+                    RotatingThePlayer(path.lookPoints[pathIndex]);
+                    if (transform != null && target != null)
+                    {
+                        if (Mathf.Abs(angleDifferenceToTarget) < angleDifferenceToTargetTreshhold && (target.position - transform.position).sqrMagnitude > noMoreMovementDistance * noMoreMovementDistance)
+                        {
+                            transform.Translate(Vector3.up * speed * Time.deltaTime * speedPercent, Space.Self);//change it when ballancing the game
+                        }
+                    }
                 }
+                yield return null;
             }
-            yield return null;
         }
     }
 
@@ -158,7 +165,7 @@ public class Unit : MonoBehaviour {
                 {
                     sqrtDistances.TryGetValue(targets[i], out dist);
                 }
-                if (minDist > dist)
+                if (minDist > dist && !targets[i].GetComponent<EnemyCombatController>().isDead)
                 {
                     minDist = dist;
                     target = targets[i].transform;

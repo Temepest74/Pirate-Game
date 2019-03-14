@@ -172,7 +172,7 @@ MonoBehaviour:
   damage: 2
   ultimateCD: 10
   ultimateDescription: Increase the maximum health with 60 percent
-  isDead: 1
+  isDead: 0
   isEliminated: 0
   projectile: {fileID: 1967866206798720496, guid: b08817b56bbf944bca78bb6a8a1d0db7,
     type: 3}

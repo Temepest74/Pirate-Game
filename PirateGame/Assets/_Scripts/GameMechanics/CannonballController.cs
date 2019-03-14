@@ -20,20 +20,12 @@ public class CannonballController : MonoBehaviour
                 PlayerCombatSystem playerCombatSystem;
                 playerCombatSystem = collision.GetComponent<PlayerCombatSystem>();
                 playerCombatSystem.OnDamageReceive(playerCombatSystem.damage);
-                if(playerCombatSystem.isDead)
-                {
-                    shotter.GetComponent<PlayerCombatSystem>().continousAttack = false;
-                }
             }
             else if (collision.GetComponent<EnemyCombatController>() != null)
             {
                 EnemyCombatController enemyCombatController;
                 enemyCombatController = collision.GetComponent<EnemyCombatController>();
                 enemyCombatController.OnDamageReceive(enemyCombatController.damage);
-                if (enemyCombatController.isDead)
-                {
-                    shotter.GetComponent<PlayerCombatSystem>().continousAttack = false;
-                }
             }
             Destroy(gameObject);
         }
