@@ -168,12 +168,13 @@ MonoBehaviour:
   ultimateCD: 10
   ultimateImage: {fileID: 21300000, guid: da5f79080add34f479e55c786429b26f, type: 3}
   ultimateDescription: Increase the maximum health with 60 percent
-  isDead: 1
+  isDead: 0
   isEliminated: 0
   ultimateImageHolder: {fileID: 0}
   projectile: {fileID: 1967866206798720496, guid: b08817b56bbf944bca78bb6a8a1d0db7,
     type: 3}
   range: 3
+  continousAttack: 0
   damageShipSprites:
   - {fileID: 21300000, guid: c1a91459e01634ef58920e7d03324a06, type: 3}
   - {fileID: 21300000, guid: 49b2d0999b9424414a1cc083931a28c5, type: 3}

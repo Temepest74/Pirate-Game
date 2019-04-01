@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class PlayerCombatSystem : MonoBehaviour
 {
@@ -58,7 +59,6 @@ public class PlayerCombatSystem : MonoBehaviour
             }
             if (Time.time > nextFire)
             {
-                //opreste in momentul in care obiectul e mort
                 nextFire = Time.time + fireRate;
                 if (raycastHit2D.collider.Equals(gameObject.GetComponent<CapsuleCollider2D>()))
                 {
@@ -99,8 +99,14 @@ public class PlayerCombatSystem : MonoBehaviour
         {
             isDead = true;
             gameObject.GetComponent<SpriteRenderer>().sprite = deadSprite;
+            StartCoroutine(DisableObject(2f, () => gameObject.SetActive(false)));
             gameObject.GetComponent<PlayerMovement>().enabled = false;
-            Destroy(gameObject, 2);
         }
+    }
+
+    IEnumerator DisableObject(float seconds, Action action)
+    {
+        yield return new WaitForSeconds(seconds);
+        action.Invoke();
     }
 }

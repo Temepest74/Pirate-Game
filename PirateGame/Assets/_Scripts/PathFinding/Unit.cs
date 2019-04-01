@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Unit : MonoBehaviour {
+public class Unit : MonoBehaviour
+{
 
     const float minPathUpdateTime = .2f;
     const float pathUpdateMoveTreshhold = .4f;
@@ -34,7 +35,7 @@ public class Unit : MonoBehaviour {
 
     public void OnPathFound(Vector3[] waipoints, bool pathSuccesful)
     {
-        if(pathSuccesful)
+        if (pathSuccesful && target != null)
         {
             path = new Path(waipoints, transform.position, turnDst, stoppingDistance);
             StopCoroutine("FollowPath");
@@ -44,22 +45,22 @@ public class Unit : MonoBehaviour {
 
     IEnumerator UpdatePath()
     {
-        if(Time.timeSinceLevelLoad < .3f)
+        if (Time.timeSinceLevelLoad < .3f)
         {
             yield return new WaitForSeconds(.3f);
         }
         PathRequestManager.RequestPath(new PathRequest(transform.position, target.position, OnPathFound));
         float sqrtMoveTreshhold = pathUpdateMoveTreshhold * pathUpdateMoveTreshhold;
         Vector3 targetPosOld = target.position;
-
-        while(true)
+        while (true)
         {
             yield return new WaitForSeconds(minPathUpdateTime);
-            if ((target.position - targetPosOld).sqrMagnitude > sqrtMoveTreshhold)
-            {
-                PathRequestManager.RequestPath(new PathRequest(transform.position, target.position, OnPathFound));
-                targetPosOld = target.position;
-            }
+            if (target != null)
+                if ((target.position - targetPosOld).sqrMagnitude > sqrtMoveTreshhold)
+                {
+                    PathRequestManager.RequestPath(new PathRequest(transform.position, target.position, OnPathFound));
+                    targetPosOld = target.position;
+                }
         }
     }
 
@@ -141,13 +142,15 @@ public class Unit : MonoBehaviour {
     {
         while (true)
         {
+            target = null;
             GameObject[] targets = GameObject.FindGameObjectsWithTag("Enemy");
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             Dictionary<GameObject, float> sqrtDistances = new Dictionary<GameObject, float>();
-            if (GetDistance(player) > pathUpdateMoveTreshhold)
-            {
-                sqrtDistances.Add(player, GetDistance(player));
-            }
+            if (player != null)
+                if (GetDistance(player) > pathUpdateMoveTreshhold)
+                {
+                    sqrtDistances.Add(player, GetDistance(player));
+                }
             for (int i = 0; i < targets.Length; i++)
             {
                 if (GetDistance(targets[i]) > pathUpdateMoveTreshhold)
@@ -156,9 +159,16 @@ public class Unit : MonoBehaviour {
                 }
             }
             float minDist;
-            target = player.transform;
-            sqrtDistances.TryGetValue(player, out minDist);
-            for (int i = 0; i < targets.Length; i++)// verific ce nu trebuie
+            if (player != null && !player.GetComponent<PlayerCombatSystem>().isDead)
+            {
+                target = player.transform;
+                sqrtDistances.TryGetValue(player, out minDist);
+            }
+            else
+            {
+                minDist = Mathf.Infinity;
+            }
+            for (int i = 0; i < targets.Length; i++)
             {
                 float dist = Mathf.Infinity;
                 if (sqrtDistances.ContainsKey(targets[i]))
@@ -171,7 +181,7 @@ public class Unit : MonoBehaviour {
                     target = targets[i].transform;
                 }
             }
-            yield return new WaitForSeconds(2);
+            yield return null;
         }
     }
 
