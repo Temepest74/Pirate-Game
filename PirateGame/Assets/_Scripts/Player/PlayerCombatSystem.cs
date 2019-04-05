@@ -11,6 +11,7 @@ public class PlayerCombatSystem : MonoBehaviour
     public float currentHealth;
     public float attackSpeed;
     public float damage;
+    public float deffense;
     public float ultimateCD;
     public Sprite ultimateImage;
     public string ultimateDescription;

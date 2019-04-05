@@ -13,6 +13,7 @@ public class EnemyCombatController : MonoBehaviour
     public float currentHealth;
     public float attackSpeed;
     public float damage;
+    public float deffense;
     public float ultimateCD;
     public string ultimateDescription;
     public bool isDead;

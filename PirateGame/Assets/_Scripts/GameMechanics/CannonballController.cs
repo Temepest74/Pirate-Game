@@ -13,20 +13,30 @@ public class CannonballController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject != shotter)
+        if ((shotter != null) && (collision.gameObject != shotter))
         {
+            Object enemy;
+            float shotterDamage;
+            if(shotter.GetComponent<PlayerCombatSystem>() != null)
+            {
+                shotterDamage = shotter.GetComponent<PlayerCombatSystem>().damage;
+            }else if(shotter.GetComponent<EnemyCombatController>() != null)
+            {
+                shotterDamage = shotter.GetComponent<EnemyCombatController>().damage;
+            }
+            else
+            {
+                Debug.Log("ERROR 0");
+            }
             if (collision.GetComponent<PlayerCombatSystem>() != null)
             {
-                PlayerCombatSystem playerCombatSystem;
-                playerCombatSystem = collision.GetComponent<PlayerCombatSystem>();
-                playerCombatSystem.OnDamageReceive(playerCombatSystem.damage);
+                enemy = collision.GetComponent<PlayerCombatSystem>();
             }
             else if (collision.GetComponent<EnemyCombatController>() != null)
             {
-                EnemyCombatController enemyCombatController;
-                enemyCombatController = collision.GetComponent<EnemyCombatController>();
-                enemyCombatController.OnDamageReceive(enemyCombatController.damage);
+                enemy = collision.GetComponent<EnemyCombatController>();
             }
+            float gotDamage = shotterDamage * (100 / (100 + enemy.GetInstanceID.
             Destroy(gameObject);
         }
     }

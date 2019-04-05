@@ -70,11 +70,12 @@ public class Unit : MonoBehaviour
         {
             bool followingPath = true;
             int pathIndex = 0;
+            
             RotatingThePlayer(path.lookPoints[pathIndex]);
 
             float speedPercent = 1f;
 
-            while (followingPath)
+            while (followingPath && !gameObject.GetComponent<EnemyCombatController>().isDead)
             {
                 Vector2 pos2D = new Vector2(transform.position.x, transform.position.y);
                 while (path.turnBoundaries[pathIndex].HasCrossedLine(pos2D))
