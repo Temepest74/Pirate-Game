@@ -107,6 +107,41 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 3635b3aea955548dcb7975f04fdb56ac,
         type: 3}
+    - target: {fileID: 2465620485030810666, guid: a976041e619c04c8a8eb35b799b61c02,
+        type: 3}
+      propertyPath: entityData.ultimateImage
+      value: 
+      objectReference: {fileID: 21300004, guid: da5f79080add34f479e55c786429b26f,
+        type: 3}
+    - target: {fileID: 2465620485030810666, guid: a976041e619c04c8a8eb35b799b61c02,
+        type: 3}
+      propertyPath: entityData.damagedSpries.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 5e13d8199f7b449848967dc2988b9a88,
+        type: 3}
+    - target: {fileID: 2465620485030810666, guid: a976041e619c04c8a8eb35b799b61c02,
+        type: 3}
+      propertyPath: entityData.damagedSpries.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 899beffa1e2d54bf889dee6801aaab33,
+        type: 3}
+    - target: {fileID: 2465620485030810666, guid: a976041e619c04c8a8eb35b799b61c02,
+        type: 3}
+      propertyPath: entityData.damagedSpries.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: eb0e77493b02a471782b01f1acf4f1f9,
+        type: 3}
+    - target: {fileID: 2465620485030810666, guid: a976041e619c04c8a8eb35b799b61c02,
+        type: 3}
+      propertyPath: entityData.deadSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3635b3aea955548dcb7975f04fdb56ac,
+        type: 3}
+    - target: {fileID: 2465620485030810666, guid: a976041e619c04c8a8eb35b799b61c02,
+        type: 3}
+      propertyPath: entityData.ultimateDescription
+      value: 'Increase the speed of the boat with 40 percent '
+      objectReference: {fileID: 0}
     - target: {fileID: 4465004063329337392, guid: a976041e619c04c8a8eb35b799b61c02,
         type: 3}
       propertyPath: boatStats

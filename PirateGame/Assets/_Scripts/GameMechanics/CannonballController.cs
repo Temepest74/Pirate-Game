@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class CannonballController : MonoBehaviour
 {
@@ -15,28 +16,12 @@ public class CannonballController : MonoBehaviour
     {
         if ((shotter != null) && (collision.gameObject != shotter))
         {
-            Object enemy;
             float shotterDamage;
-            if(shotter.GetComponent<PlayerCombatSystem>() != null)
+            shotterDamage = shotter.GetComponent<IEntityData>().GetEntityData().damage;
+            if (collision.GetComponent<IEntityData>() != null)
             {
-                shotterDamage = shotter.GetComponent<PlayerCombatSystem>().damage;
-            }else if(shotter.GetComponent<EnemyCombatController>() != null)
-            {
-                shotterDamage = shotter.GetComponent<EnemyCombatController>().damage;
+                collision.GetComponent<IEntityData>().OnDamageReceive(shotterDamage);
             }
-            else
-            {
-                Debug.Log("ERROR 0");
-            }
-            if (collision.GetComponent<PlayerCombatSystem>() != null)
-            {
-                enemy = collision.GetComponent<PlayerCombatSystem>();
-            }
-            else if (collision.GetComponent<EnemyCombatController>() != null)
-            {
-                enemy = collision.GetComponent<EnemyCombatController>();
-            }
-            float gotDamage = shotterDamage * (100 / (100 + enemy.GetInstanceID.
             Destroy(gameObject);
         }
     }

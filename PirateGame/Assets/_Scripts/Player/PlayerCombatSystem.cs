@@ -4,23 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class PlayerCombatSystem : MonoBehaviour
+public class PlayerCombatSystem : MonoBehaviour, IEntityData
 {
-    public float speed;
-    public float maxHealth;
-    public float currentHealth;
-    public float attackSpeed;
-    public float damage;
-    public float deffense;
-    public float ultimateCD;
-    public Sprite ultimateImage;
-    public string ultimateDescription;
-    public bool isDead;
-    public bool isEliminated;// nu se spawneaza runda viitoare
-    public GameObject ultimateImageHolder;
-    public GameObject projectile;
-
-    public float range;
+    public EntityData GetEntityData()
+    {
+        return entityData;
+    }
+    public EntityData entityData;
 
     private float fireRate;
     private float nextFire;
@@ -30,17 +20,15 @@ public class PlayerCombatSystem : MonoBehaviour
     Ray2D ray;
     RaycastHit2D raycastHit2D;
 
-    public Sprite[] damageShipSprites;
-    public Sprite deadSprite;
 
     private void Start()
     {
-        currentHealth = maxHealth;
-        fireRate = attackSpeed;
-        ultimateImageHolder = GameObject.FindGameObjectWithTag("UltimateImageHolder");
-        if (ultimateImage != null)
+        entityData.currentHealth = entityData.maxHealth;
+        fireRate = entityData.attackSpeed;
+        entityData.ultimateImageHolder = GameObject.FindGameObjectWithTag("UltimateImageHolder");
+        if (entityData.ultimateImage != null)
         {
-            ultimateImageHolder.GetComponent<Image>().sprite = ultimateImage;
+            entityData.ultimateImageHolder.GetComponent<Image>().sprite = entityData.ultimateImage;
         }
         else
         {
@@ -51,7 +39,7 @@ public class PlayerCombatSystem : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) || continousAttack)
         {
-            fireRate = attackSpeed;
+            fireRate = entityData.attackSpeed;
             if (continousAttack == false || Input.GetMouseButtonDown(0))
             {
                 continousAttack = true;
@@ -68,9 +56,9 @@ public class PlayerCombatSystem : MonoBehaviour
                 {
                     Vector3 dir = new Vector3(raycastHit2D.collider.transform.position.x - transform.position.x,
                     raycastHit2D.collider.transform.position.y - transform.position.y, 0);
-                    if (dir.sqrMagnitude < range * range && !raycastHit2D.collider.GetComponent<EnemyCombatController>().isDead)
+                    if (dir.sqrMagnitude < entityData.range * entityData.range && !raycastHit2D.collider.GetComponent<IEntityData>().GetEntityData().isDead)
                     {
-                        GameObject obj = Instantiate(projectile, transform.position, Quaternion.identity) as GameObject;
+                        GameObject obj = Instantiate(entityData.projectile, transform.position, Quaternion.identity) as GameObject;
                         obj.transform.up = dir;
                         obj.GetComponent<CannonballController>().shotter = gameObject;
                     }
@@ -83,31 +71,26 @@ public class PlayerCombatSystem : MonoBehaviour
         }
     }
 
-    private void OnValidate()
+    public void OnDamageReceive(float damage = 0)
     {
-        OnDamageReceive();
-    }
-
-    public void OnDamageReceive(float damageAmount = 0)
-    {
-        float procentHealth = (currentHealth * 2.0f) / maxHealth;
-        currentHealth -= damageAmount;
-        if (currentHealth <= maxHealth && currentHealth > 0)
+        entityData.OnDamageReceive(gameObject, damage);
+        if (entityData.currentHealth <= 0)
         {
-            gameObject.GetComponent<SpriteRenderer>().sprite = damageShipSprites[(int)procentHealth];
-        }
-        if (currentHealth == 0)
-        {
-            isDead = true;
-            gameObject.GetComponent<SpriteRenderer>().sprite = deadSprite;
-            StartCoroutine(DisableObject(2f, () => gameObject.SetActive(false)));
             gameObject.GetComponent<PlayerMovement>().enabled = false;
+            gameObject.GetComponent<PlayerCombatSystem>().enabled = false;
         }
     }
 
-    IEnumerator DisableObject(float seconds, Action action)
+    public void CallDisableObject()
+    {
+        if (Application.isPlaying)
+            StartCoroutine(DisableObject(2f, () => gameObject.SetActive(false)));
+    }
+
+    public IEnumerator DisableObject(float seconds, Action action)
     {
         yield return new WaitForSeconds(seconds);
         action.Invoke();
     }
+
 }

@@ -162,24 +162,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 515780444385694789}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cab04de56c964d69ac07932b13220c5, type: 3}
+  m_Script: {fileID: 11500000, guid: 266c1fb438e1f44569f0a8f1ef3597d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  maxHealth: 10
-  currentHealth: 10
-  attackSpeed: 1
-  damage: 2
-  ultimateCD: 10
-  ultimateDescription: Increase the maximum health with 60 percent
-  isDead: 0
-  isEliminated: 0
-  projectile: {fileID: 1967866206798720496, guid: b08817b56bbf944bca78bb6a8a1d0db7,
-    type: 3}
-  range: 3
-  damageShipSprites:
-  - {fileID: 21300000, guid: c1a91459e01634ef58920e7d03324a06, type: 3}
-  - {fileID: 21300000, guid: 49b2d0999b9424414a1cc083931a28c5, type: 3}
-  - {fileID: 21300000, guid: 257ff02a55cdb4c35b9c082c8ba4d1a9, type: 3}
-  deadSprite: {fileID: 21300000, guid: bb20b7ca1da3b44418d945fd7eee210b, type: 3}
+  entityData:
+    speed: 6
+    maxHealth: 100
+    currentHealth: 100
+    attackSpeed: 1
+    damage: 15
+    deffense: 10
+    ultimateCD: 15
+    ultimateImage: {fileID: 21300000, guid: da5f79080add34f479e55c786429b26f, type: 3}
+    ultimateDescription: ' Increase the maximum health with 60 percent'
+    isDead: 0
+    isEliminated: 0
+    ultimateImageHolder: {fileID: 0}
+    projectile: {fileID: 1967866206798720496, guid: b08817b56bbf944bca78bb6a8a1d0db7,
+      type: 3}
+    range: 3
+    damagedSpries:
+    - {fileID: 21300000, guid: c1a91459e01634ef58920e7d03324a06, type: 3}
+    - {fileID: 21300000, guid: 49b2d0999b9424414a1cc083931a28c5, type: 3}
+    - {fileID: 21300000, guid: 257ff02a55cdb4c35b9c082c8ba4d1a9, type: 3}
+    deadSprite: {fileID: 21300000, guid: bb20b7ca1da3b44418d945fd7eee210b, type: 3}
   continousAttack: 0

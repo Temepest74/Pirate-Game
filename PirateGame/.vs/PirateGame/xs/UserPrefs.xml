@@ -1,15 +1,17 @@
 ﻿<Properties StartupConfiguration="{0658773C-97AB-F51B-8991-5EC830C7A4F9}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_Scripts/GameMechanics/CannonballController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_Scripts/Enemy/EnemyCombatController.cs">
     <Files>
-      <File FileName="Assets/_Scripts/Player/PlayerCombatSystem.cs" Line="14" Column="26" />
-      <File FileName="Assets/_Scripts/Enemy/EnemyCombatController.cs" Line="16" Column="27" />
-      <File FileName="Assets/_Scripts/GameMechanics/CannonballController.cs" Line="39" Column="48" />
-      <File FileName="Assets/_Scripts/PathFinding/Unit.cs" Line="78" Column="93" />
+      <File FileName="Assets/_Scripts/Player/PlayerCombatSystem.cs" Line="80" Column="55" />
+      <File FileName="Assets/_Scripts/Enemy/EnemyCombatController.cs" Line="69" Column="58" />
+      <File FileName="Assets/_Scripts/Entity/EntityData.cs" Line="40" Column="63" />
+      <File FileName="Assets/_Scripts/Entity/IEntityData.cs" Line="9" Column="5" />
+      <File FileName="Assets/_Scripts/GameMechanics/CannonballController.cs" Line="19" Column="18" />
+      <File FileName="Assets/_Scripts/PathFinding/Unit.cs" Line="179" Column="101" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="04537744-28d0-44d2-8581-4e51da3c2fde" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

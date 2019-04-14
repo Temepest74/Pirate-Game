@@ -66,7 +66,7 @@ public class Unit : MonoBehaviour
 
     IEnumerator FollowPath()
     {
-        if (!gameObject.GetComponent<EnemyCombatController>().isDead)
+        if (!gameObject.GetComponent<IEntityData>().GetEntityData().isDead)
         {
             bool followingPath = true;
             int pathIndex = 0;
@@ -75,7 +75,7 @@ public class Unit : MonoBehaviour
 
             float speedPercent = 1f;
 
-            while (followingPath && !gameObject.GetComponent<EnemyCombatController>().isDead)
+            while (followingPath && !gameObject.GetComponent<IEntityData>().GetEntityData().isDead)
             {
                 Vector2 pos2D = new Vector2(transform.position.x, transform.position.y);
                 while (path.turnBoundaries[pathIndex].HasCrossedLine(pos2D))
@@ -160,7 +160,7 @@ public class Unit : MonoBehaviour
                 }
             }
             float minDist;
-            if (player != null && !player.GetComponent<PlayerCombatSystem>().isDead)
+            if (player != null && !player.GetComponent<IEntityData>().GetEntityData().isDead)
             {
                 target = player.transform;
                 sqrtDistances.TryGetValue(player, out minDist);
@@ -176,7 +176,7 @@ public class Unit : MonoBehaviour
                 {
                     sqrtDistances.TryGetValue(targets[i], out dist);
                 }
-                if (minDist > dist && !targets[i].GetComponent<EnemyCombatController>().isDead)
+                if (minDist > dist && !targets[i].GetComponent<IEntityData>().GetEntityData().isDead)
                 {
                     minDist = dist;
                     target = targets[i].transform;
