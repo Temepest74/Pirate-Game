@@ -9,13 +9,13 @@ public class GridForA : MonoBehaviour {
     public LayerMask unwalkableMask;
     public Vector2 gridWorldSize;
     public float nodeRadius;
-    Node[,] grid;
+    public Node[,] grid;
     public TerrainType[] walkingRegions;
     LayerMask walkableMask;
     Dictionary<int, int> walkableRegionsDictionary = new Dictionary<int, int>();
 
     float nodeDiameter;
-    int gridSizeX, gridSizeY;
+    public int gridSizeX, gridSizeY;
 
     int penaltyMin = int.MaxValue;
     int penaltyMax = int.MinValue;

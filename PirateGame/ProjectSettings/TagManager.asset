@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - ChinematicCamera
   - UltimateImageHolder
+  - PathfindingHolder
   layers:
   - Default
   - TransparentFX

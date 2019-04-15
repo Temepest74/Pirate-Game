@@ -1,5 +1,5 @@
 ﻿using System.Collections; using System.Collections.Generic; using UnityEngine; using System;  public class PathFinding : MonoBehaviour
-{     GridForA grid;      private void Awake()     {         grid = GetComponent<GridForA>();     }      public void FindPath(PathRequest request, Action<PathResult> callback)     {          Vector3[] waypoints = new Vector3[0];         bool pathSucces = false;          Node startNode = grid.NodeFromWorldPoint(request.pathStart);         Node targetNode = grid.NodeFromWorldPoint(request.pathEnd);          if (startNode.walkable && targetNode.walkable)
+{     GridForA grid;      private void Awake()     {         grid = GetComponent<GridForA>();     }      public void FindPath(PathRequest request, Action<PathResult> callback)     {         Vector3[] waypoints = new Vector3[0];         bool pathSucces = false;          Node startNode = grid.NodeFromWorldPoint(request.pathStart);         Node targetNode = grid.NodeFromWorldPoint(request.pathEnd);          if (startNode.walkable && targetNode.walkable)
         {
             Heap<Node> openSet = new Heap<Node>(grid.MaxSize);
             HashSet<Node> closedSet = new HashSet<Node>();

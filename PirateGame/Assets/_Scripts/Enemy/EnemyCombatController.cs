@@ -31,7 +31,7 @@ public class EnemyCombatController : MonoBehaviour, IEntityData
 
     private void Update()
     {
-        if (unit.target != null)
+        if (unit.target.GetComponent<IEntityData>() != null)
         {
             float distance = new Vector3(unit.target.transform.position.x - transform.position.x, unit.target.transform.position.y - transform.position.y, 0).sqrMagnitude;
             if (continousAttack == true || distance <= entityData.range * entityData.range)

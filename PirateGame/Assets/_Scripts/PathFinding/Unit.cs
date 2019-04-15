@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
+    Transform transformOld;
 
     const float minPathUpdateTime = .2f;
     const float pathUpdateMoveTreshhold = .4f;
@@ -16,7 +17,7 @@ public class Unit : MonoBehaviour
     public float noMoreMovementDistance;
 
     Path path;
-    Rigidbody2D rb2D;
+    GridForA grid;
 
     [HideInInspector]
     public float angleDifferenceToTarget;
@@ -24,11 +25,12 @@ public class Unit : MonoBehaviour
 
     private void Awake()
     {
-        rb2D = GetComponent<Rigidbody2D>();
+        grid = GameObject.FindGameObjectWithTag("PathfindingHolder").GetComponent<GridForA>();
     }
 
     private void Start()
     {
+        target = new GameObject().transform;
         StartCoroutine(SetTarget());
         StartCoroutine(UpdatePath());
     }
@@ -66,7 +68,7 @@ public class Unit : MonoBehaviour
 
     IEnumerator FollowPath()
     {
-        if (!gameObject.GetComponent<IEntityData>().GetEntityData().isDead)
+        if (!gameObject.GetComponent<IEntityData>().GetEntityData().isDead || gameObject.GetComponent<IEntityData>() == null)
         {
             bool followingPath = true;
             int pathIndex = 0;
@@ -74,8 +76,7 @@ public class Unit : MonoBehaviour
             RotatingThePlayer(path.lookPoints[pathIndex]);
 
             float speedPercent = 1f;
-
-            while (followingPath && !gameObject.GetComponent<IEntityData>().GetEntityData().isDead)
+            while (followingPath && !gameObject.GetComponent<IEntityData>().GetEntityData().isDead || gameObject.GetComponent<IEntityData>() == null)
             {
                 Vector2 pos2D = new Vector2(transform.position.x, transform.position.y);
                 while (path.turnBoundaries[pathIndex].HasCrossedLine(pos2D))
@@ -84,8 +85,7 @@ public class Unit : MonoBehaviour
                     {
                         followingPath = false;
                         break;
-                    }
-                    else
+                    }else
                     {
                         pathIndex++;
                     }
@@ -141,48 +141,27 @@ public class Unit : MonoBehaviour
 
     private IEnumerator SetTarget()
     {
+        transformOld = transform;
         while (true)
         {
-            target = null;
-            GameObject[] targets = GameObject.FindGameObjectsWithTag("Enemy");
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            Dictionary<GameObject, float> sqrtDistances = new Dictionary<GameObject, float>();
-            if (player != null)
-                if (GetDistance(player) > pathUpdateMoveTreshhold)
-                {
-                    sqrtDistances.Add(player, GetDistance(player));
-                }
-            for (int i = 0; i < targets.Length; i++)
+            if (transformOld.position == transform.position)
             {
-                if (GetDistance(targets[i]) > pathUpdateMoveTreshhold)
+                int x;
+                int y;
+                while (true)
                 {
-                    sqrtDistances.Add(targets[i], GetDistance(targets[i]));
+                    x = (int)Random.Range(0, grid.gridSizeX - 1);
+                    y = (int)Random.Range(0, grid.gridSizeY - 1);
+                    if (grid.grid[x, y].walkable)
+                    {
+                        break;
+                    }
                 }
+                target.position = grid.grid[x, y].worldPosition;
+                RotatingThePlayer(target.position);
             }
-            float minDist;
-            if (player != null && !player.GetComponent<IEntityData>().GetEntityData().isDead)
-            {
-                target = player.transform;
-                sqrtDistances.TryGetValue(player, out minDist);
-            }
-            else
-            {
-                minDist = Mathf.Infinity;
-            }
-            for (int i = 0; i < targets.Length; i++)
-            {
-                float dist = Mathf.Infinity;
-                if (sqrtDistances.ContainsKey(targets[i]))
-                {
-                    sqrtDistances.TryGetValue(targets[i], out dist);
-                }
-                if (minDist > dist && !targets[i].GetComponent<IEntityData>().GetEntityData().isDead)
-                {
-                    minDist = dist;
-                    target = targets[i].transform;
-                }
-            }
-            yield return null;
+            transformOld.position = transform.position;
+            yield return new WaitForSeconds(2);
         }
     }
 
