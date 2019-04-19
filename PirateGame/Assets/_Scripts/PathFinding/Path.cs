@@ -43,7 +43,7 @@ public class Path {
         return new Vector2(v.x, v.y);
     }
 
-    /*public void DrawWithGizmos()
+    public void DrawWithGizmos()
     {
         Gizmos.color = Color.black;
 
@@ -57,5 +57,5 @@ public class Path {
         {
             l.DrawWithGizmos(10);
         }
-    }*/
+    }
 }

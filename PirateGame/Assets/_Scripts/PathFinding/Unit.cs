@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
+    public LayerMask layer;
     Transform transformOld;
 
     const float minPathUpdateTime = .2f;
@@ -15,6 +16,8 @@ public class Unit : MonoBehaviour
     public float turnSpeed = 0.5f;
     public float stoppingDistance = 10;
     public float noMoreMovementDistance;
+    public float targetCheckSizeX;
+    public float targetCheckSizeY;
 
     Path path;
     GridForA grid;
@@ -23,6 +26,8 @@ public class Unit : MonoBehaviour
     public float angleDifferenceToTarget;
     public float angleDifferenceToTargetTreshhold;
 
+    private bool setRandomTarget;
+
     private void Awake()
     {
         grid = GameObject.FindGameObjectWithTag("PathfindingHolder").GetComponent<GridForA>();
@@ -30,14 +35,20 @@ public class Unit : MonoBehaviour
 
     private void Start()
     {
-        target = new GameObject().transform;
-        StartCoroutine(SetTarget());
-        StartCoroutine(UpdatePath());
+        Random.InitState((int)System.DateTime.Now.Ticks);
+        StartCoroutine("SetTarget");
+        StartCoroutine("UpdatePath");
+    }
+
+    private void Update()
+    {
+        FindNearestTarget();
     }
 
     public void OnPathFound(Vector3[] waipoints, bool pathSuccesful)
     {
-        if (pathSuccesful && target != null)
+        //check this for stopping path
+        if (pathSuccesful && target != null && gameObject.activeSelf)
         {
             path = new Path(waipoints, transform.position, turnDst, stoppingDistance);
             StopCoroutine("FollowPath");
@@ -72,7 +83,7 @@ public class Unit : MonoBehaviour
         {
             bool followingPath = true;
             int pathIndex = 0;
-            
+
             RotatingThePlayer(path.lookPoints[pathIndex]);
 
             float speedPercent = 1f;
@@ -85,7 +96,8 @@ public class Unit : MonoBehaviour
                     {
                         followingPath = false;
                         break;
-                    }else
+                    }
+                    else
                     {
                         pathIndex++;
                     }
@@ -115,13 +127,13 @@ public class Unit : MonoBehaviour
         }
     }
 
-    /*public void OnDrawGizmos()
+    public void OnDrawGizmos()
     {
-        if(path!=null)
+        if (path != null)
         {
             path.DrawWithGizmos();
         }
-    }*/
+    }
 
     protected virtual void RotatingThePlayer(Vector3 target)
     {
@@ -139,13 +151,82 @@ public class Unit : MonoBehaviour
         }
     }
 
+    private void FindNearestTarget()
+    {
+        RaycastHit2D[] raycastHit2Ds = Physics2D.BoxCastAll(
+            new Vector2(transform.position.x, transform.position.y),
+            new Vector2(targetCheckSizeX, targetCheckSizeY),
+            0,
+            Vector2.zero,
+            Mathf.Infinity,
+            layer.value
+            );
+        int notUsable = 0;
+        foreach (RaycastHit2D item in raycastHit2Ds)
+        {
+            if(item.collider.gameObject.GetComponent<IEntityData>().GetEntityData().isDead ||
+                item.collider.gameObject == gameObject)
+            {
+                notUsable++;
+            }
+        }
+        // Debug.Log(raycastHit2Ds.Length);
+        if (raycastHit2Ds.Length > 1 && raycastHit2Ds.Length != notUsable)
+        {
+            StopCoroutine("SetTarget");
+            float minDist = Mathf.Infinity;
+            foreach (RaycastHit2D raycastHit in raycastHit2Ds)
+            {
+                if (target != null && target.gameObject.GetComponent<IEntityData>() == null)
+                {
+                    target.gameObject.GetComponent<SelfDestroy>().DestroyNow();
+                }
+                if (raycastHit.collider.gameObject != gameObject &&
+                    raycastHit.collider.gameObject.GetComponent<IEntityData>() != null &&
+                    raycastHit.collider.gameObject.GetComponent<IEntityData>().GetEntityData().isDead == false)
+                {
+                    float dist = Mathf.Abs(Vector3.Distance(raycastHit.collider.gameObject.transform.position, transform.position));
+                    if (dist < minDist)
+                    {
+                        minDist = dist;
+                        target = raycastHit.collider.gameObject.transform;
+                    }
+                }
+                else
+                {
+                    continue;
+                }
+            }
+        }
+        if (target == null)
+        {
+            StartCoroutine("SetTarget");
+            return;
+        }
+        if (target?.gameObject.GetComponent<IEntityData>()?.GetEntityData().isDead == true)
+        {
+            StartCoroutine("SetTarget");
+        }
+    }
+
     private IEnumerator SetTarget()
     {
-        transformOld = transform;
         while (true)
         {
+            transformOld = transform;
+            if (target != null && target.gameObject.GetComponent<IEntityData>() == null)
+            {
+                target.gameObject.GetComponent<SelfDestroy>().DestroyNow();
+            }
+            target = new GameObject().transform;
+            target.name = string.Concat(gameObject.name, "target");
+            target.gameObject.AddComponent<SelfDestroy>();
+            target.gameObject.GetComponent<SelfDestroy>().onStartDestroy = false;
+            target.gameObject.GetComponent<SelfDestroy>().destroyTime = 0;
             if (transformOld.position == transform.position)
             {
+                // Debug.Log("here");
+
                 int x;
                 int y;
                 while (true)
@@ -161,7 +242,7 @@ public class Unit : MonoBehaviour
                 RotatingThePlayer(target.position);
             }
             transformOld.position = transform.position;
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(5);
         }
     }
 

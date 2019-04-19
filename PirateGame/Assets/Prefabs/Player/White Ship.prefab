@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 114325458398358306}
   - component: {fileID: 165435065}
   - component: {fileID: 2465620485030810666}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: White Ship
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.66, y: 1.13}
+  m_Size: {x: 0.52, y: 1.05}
   m_Direction: 0
 --- !u!114 &114325458398358306
 MonoBehaviour:

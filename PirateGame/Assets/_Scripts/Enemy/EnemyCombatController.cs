@@ -31,7 +31,9 @@ public class EnemyCombatController : MonoBehaviour, IEntityData
 
     private void Update()
     {
-        if (unit.target.GetComponent<IEntityData>() != null)
+        if (unit.target == null)
+            return;
+        if (unit.target?.GetComponent<IEntityData>() != null)
         {
             float distance = new Vector3(unit.target.transform.position.x - transform.position.x, unit.target.transform.position.y - transform.position.y, 0).sqrMagnitude;
             if (continousAttack == true || distance <= entityData.range * entityData.range)
@@ -65,6 +67,7 @@ public class EnemyCombatController : MonoBehaviour, IEntityData
         entityData.OnDamageReceive(gameObject, damage);
         if (entityData.currentHealth <= 0)
         {
+            gameObject.GetComponent<Unit>().target.GetComponent<SelfDestroy>()?.DestroyNow();
             gameObject.GetComponent<Unit>().enabled = false;
             gameObject.GetComponent<EnemyCombatController>().enabled = false;
         }

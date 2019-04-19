@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 515780444385694794}
   - component: {fileID: 515780444385694799}
   - component: {fileID: 1282450668570048858}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: White Ship
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.66, y: 1.13}
+  m_Size: {x: 0.52, y: 1.05}
   m_Direction: 0
 --- !u!50 &515780444385694792
 Rigidbody2D:
@@ -133,14 +133,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 644bfc4cbd59b4a32a1a66342573b741, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layer:
+    serializedVersion: 2
+    m_Bits: 2048
   target: {fileID: 0}
   speed: 5
   turnDst: 1
-  turnSpeed: 70
-  stoppingDistance: 3
-  noMoreMovementDistance: 2.5
+  turnSpeed: 100
+  stoppingDistance: 0
+  noMoreMovementDistance: 1
+  targetCheckSizeX: 16
+  targetCheckSizeY: 8
   angleDifferenceToTarget: 0
-  angleDifferenceToTargetTreshhold: 60
+  angleDifferenceToTargetTreshhold: 30
 --- !u!114 &515780444385694799
 MonoBehaviour:
   m_ObjectHideFlags: 0
