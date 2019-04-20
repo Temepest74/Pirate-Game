@@ -79,6 +79,7 @@ public class Unit : MonoBehaviour
 
     IEnumerator FollowPath()
     {
+        Debug.Log("Q_5: Follow Path first if: " + !gameObject.GetComponent<IEntityData>().GetEntityData().isDead + " " + gameObject.GetComponent<IEntityData>() == null);
         if (!gameObject.GetComponent<IEntityData>().GetEntityData().isDead || gameObject.GetComponent<IEntityData>() == null)
         {
             bool followingPath = true;
@@ -89,6 +90,7 @@ public class Unit : MonoBehaviour
             float speedPercent = 1f;
             while (followingPath && !gameObject.GetComponent<IEntityData>().GetEntityData().isDead || gameObject.GetComponent<IEntityData>() == null)
             {
+                Debug.Log("Q_1: Follow Path working");
                 Vector2 pos2D = new Vector2(transform.position.x, transform.position.y);
                 while (path.turnBoundaries[pathIndex].HasCrossedLine(pos2D))
                 {

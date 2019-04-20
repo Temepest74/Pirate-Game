@@ -20,6 +20,7 @@ public class PathRequestManager : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log("Q_4: results.Count = " + results.Count);
         if(results.Count > 0)
         {
             int itemsInQueue = results.Count;
