@@ -115,7 +115,8 @@ public class GridForA : MonoBehaviour {
                 int removeIndex = Mathf.Clamp(y - kernelExtens - 1, 0, gridSizeY);
                 int addIndex = Mathf.Clamp(y + kernelExtens, 0, gridSizeY - 1);
 
-                penaltiesVerticalPass[x, y] = penaltiesVerticalPass[x, y - 1] - penaltiesHorizontalPass[x, removeIndex] + penaltiesHorizontalPass[x, addIndex];blurredPenalty = Mathf.RoundToInt((float)penaltiesVerticalPass[x, y] / (kernelSize * kernelSize));
+                penaltiesVerticalPass[x, y] = penaltiesVerticalPass[x, y - 1] - penaltiesHorizontalPass[x, removeIndex] + penaltiesHorizontalPass[x, addIndex];
+                blurredPenalty = Mathf.RoundToInt((float)penaltiesVerticalPass[x, y] / (kernelSize * kernelSize));
                 grid[x, y].movementPenalty = blurredPenalty;
 
                 if(blurredPenalty > penaltyMax)
@@ -166,7 +167,7 @@ public class GridForA : MonoBehaviour {
         y = Mathf.Clamp(y, 0, gridSizeY - 1);
 
         return grid[x, y];
-
+        
     }
 
     void OnDrawGizmos()

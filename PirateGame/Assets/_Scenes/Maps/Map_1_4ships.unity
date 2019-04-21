@@ -216,7 +216,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   gridWorldSize: {x: 33, y: 33}
-  nodeRadius: 0.25
+  nodeRadius: 0.125
   walkingRegions:
   - terrainMask:
       serializedVersion: 2
