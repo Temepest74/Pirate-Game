@@ -17,7 +17,10 @@ public class CannonballController : MonoBehaviour
         if ((shotter != null) && (collision.gameObject != shotter))
         {
             float shotterDamage;
-            shotterDamage = shotter.GetComponent<IEntityData>().GetEntityData().damage;
+            float minDamage = shotter.GetComponent<IEntityData>().GetEntityData().minDamage;
+            float maxDamage = shotter.GetComponent<IEntityData>().GetEntityData().maxDamage;
+            float trueDamage = UnityEngine.Random.Range(minDamage, maxDamage);
+            shotterDamage = trueDamage * trueDamage / (trueDamage + collision.gameObject.GetComponent<IEntityData>().GetEntityData().deffense);
             if (collision.GetComponent<IEntityData>() != null)
             {
                 collision.GetComponent<IEntityData>().OnDamageReceive(shotterDamage);

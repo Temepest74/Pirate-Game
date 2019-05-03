@@ -5,7 +5,8 @@ using System.Linq;
 
 public class RandomSpawner : MonoBehaviour
 {
-
+    public GameObject shipHealthBar;
+    public GameObject shipParent;
     public GameObject[] spawnPoints;
     public GameObject[] prefabSpawnPoints;
     public GameObject[] prefabEnemyShips;
@@ -20,21 +21,22 @@ public class RandomSpawner : MonoBehaviour
 
     private void Start()
     {
-        for(int i = 0; i < spawnPoints.Length; i++)
+        Random.InitState(System.Environment.TickCount);
+        for (int i = 0; i < spawnPoints.Length; i++)
         {
-            int rn = Random.Range(0, spawnPoints.Length );
+            int rn = Random.Range(0, spawnPoints.Length);
             var tmpry = spawnPoints[i];
             spawnPoints[i] = spawnPoints[rn];
-            spawnPoints[rn] = tmpry; 
+            spawnPoints[rn] = tmpry;
         }
         bool instantiatePlayer = (shipType == ShipType.Random);
         takenSpawnPoints = new Queue<GameObject>();
-        for(int i = 0; i < spawnPoints.Length; i++)
+        for (int i = 0; i < spawnPoints.Length; i++)
         {
             while (true)
             {
                 int rn = Random.Range(0, prefabSpawnPoints.Length - 1);
-                if(!takenSpawnPoints.Contains(prefabSpawnPoints[rn]))
+                if (!takenSpawnPoints.Contains(prefabSpawnPoints[rn]))
                 {
                     takenSpawnPoints.Enqueue(prefabSpawnPoints[rn]);
                     if (i != 0 || instantiatePlayer)
@@ -46,7 +48,7 @@ public class RandomSpawner : MonoBehaviour
             }
         }
         int currentNoOfShips = 0;
-        if(!instantiatePlayer)// if someone chose the class type
+        if (!instantiatePlayer)// if someone chose the class type
         {
             int i;
             for (i = 0; i < prefabPlayerShips.Length; i++)
@@ -58,37 +60,49 @@ public class RandomSpawner : MonoBehaviour
                 }
             }
             int j;
-            for(j = 0; j < prefabSpawnPoints.Length; j++)
+            for (j = 0; j < prefabSpawnPoints.Length; j++)
             {
-                if(prefabSpawnPoints[j].name == prefabPlayerShips[i].name)
+                if (prefabSpawnPoints[j].name == prefabPlayerShips[i].name)
                 {
                     break;
                 }
             }
             Instantiate(prefabSpawnPoints[j], spawnPoints[0].transform.position, Quaternion.identity);
             takenSpawnPoints.Dequeue();
-            GameObject gm = Instantiate(prefabPlayerShips[i], spawnPoints[0].transform.position, Quaternion.identity);
+            GameObject parent = new GameObject();
+            parent.transform.SetParent(shipParent.transform);
+            parent.name = "Player " + prefabPlayerShips[i].name;
+            GameObject ship = Instantiate(prefabPlayerShips[i], spawnPoints[0].transform.position, Quaternion.identity, parent.transform); 
+            GameObject healthbar = Instantiate(shipHealthBar, spawnPoints[0].transform.position, Quaternion.identity, parent.transform);//spawnPoints[0].transform.position can be anything
+            healthbar.GetComponent<Follow>().objectToFollow = ship;
+            healthbar.GetComponentInChildren<UpdateHealthBar>().entityData = ship.GetComponent<IEntityData>();
             currentNoOfShips++;
-            GameObject.FindWithTag("ChinematicCamera").GetComponent<Cinemachine.CinemachineVirtualCamera>().m_Follow = gm.transform;
+            GameObject.FindWithTag("ChinematicCamera").GetComponent<Cinemachine.CinemachineVirtualCamera>().m_Follow = ship.transform;
         }
         while (takenSpawnPoints.Count != 0)
         {
             GameObject toInstantiateSpawnPoint;
             toInstantiateSpawnPoint = takenSpawnPoints.Dequeue();
-            if(instantiatePlayer)
+            if (instantiatePlayer)
             {
                 instantiatePlayer = false;
                 int i;
-                for(i = 0; i < prefabPlayerShips.Length; i++)
+                for (i = 0; i < prefabPlayerShips.Length; i++)
                 {
-                    if(toInstantiateSpawnPoint.name == prefabPlayerShips[i].name)
+                    if (toInstantiateSpawnPoint.name == prefabPlayerShips[i].name)
                     {
                         break;
                     }
                 }
-                GameObject gm = Instantiate(prefabPlayerShips[i], spawnPoints[0].transform.position, Quaternion.identity);
+                GameObject parent = new GameObject();
+                parent.transform.SetParent(shipParent.transform);
+                parent.name = "Player " + prefabPlayerShips[i].name;
+                GameObject ship = Instantiate(prefabPlayerShips[i], spawnPoints[0].transform.position, Quaternion.identity, parent.transform);
+                GameObject healthbar = Instantiate(shipHealthBar, spawnPoints[0].transform.position, Quaternion.identity, parent.transform);//spawnPoints[0].transform.position can be anything
+                healthbar.GetComponent<Follow>().objectToFollow = ship;
+                healthbar.GetComponentInChildren<UpdateHealthBar>().entityData = ship.GetComponent<IEntityData>();
                 currentNoOfShips++;
-                GameObject.FindWithTag("ChinematicCamera").GetComponent<Cinemachine.CinemachineVirtualCamera>().m_Follow = gm.transform;
+                GameObject.FindWithTag("ChinematicCamera").GetComponent<Cinemachine.CinemachineVirtualCamera>().m_Follow = ship.transform;
             }
             else
             {
@@ -100,7 +114,13 @@ public class RandomSpawner : MonoBehaviour
                         break;
                     }
                 }
-                Instantiate(prefabEnemyShips[i], spawnPoints[currentNoOfShips].transform.position, Quaternion.identity);
+                GameObject parent = new GameObject();
+                parent.transform.SetParent(shipParent.transform);
+                parent.name = "Enemy " + prefabEnemyShips[i].name;
+                GameObject ship = Instantiate(prefabEnemyShips[i], spawnPoints[currentNoOfShips].transform.position, Quaternion.identity, parent.transform);
+                GameObject healthbar = Instantiate(shipHealthBar, spawnPoints[0].transform.position, Quaternion.identity, parent.transform);//spawnPoints[0].transform.position can be anything
+                healthbar.GetComponent<Follow>().objectToFollow = ship;
+                healthbar.GetComponentInChildren<UpdateHealthBar>().entityData = ship.GetComponent<IEntityData>();
                 currentNoOfShips++;
             }
         }

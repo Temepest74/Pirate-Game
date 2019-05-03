@@ -120,6 +120,36 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &37260803
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 37260804}
+  m_Layer: 0
+  m_Name: Ships
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &37260804
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37260803}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &112405737
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,7 +246,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   gridWorldSize: {x: 33, y: 33}
-  nodeRadius: 0.125
+  nodeRadius: 0.5
   walkingRegions:
   - terrainMask:
       serializedVersion: 2
@@ -224,7 +254,7 @@ MonoBehaviour:
     terrainPenalty: 1
   gridSizeX: 0
   gridSizeY: 0
-  obstacleProximityPenalty: 20
+  obstacleProximityPenalty: 50
 --- !u!4 &331668581
 Transform:
   m_ObjectHideFlags: 0
@@ -378,11 +408,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.0915747, y: 13, z: -10}
+  m_LocalPosition: {x: -7.941818, y: 13, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &546710827
 GameObject:
@@ -793,6 +823,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c1c93b9f13a142c3a01d39fe7eb5775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shipHealthBar: {fileID: 4394172654837042277, guid: 6103cf42152b64b5d9b32d4f5a6a4aae,
+    type: 3}
+  shipParent: {fileID: 37260803}
   spawnPoints:
   - {fileID: 1375568873}
   - {fileID: 1218655440}
@@ -22592,7 +22625,7 @@ Transform:
   - {fileID: 1498614222}
   - {fileID: 1329100966}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1890718592
 GameObject:

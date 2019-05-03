@@ -12,7 +12,8 @@ public class EntityData
     public float maxHealth;
     public float currentHealth;
     public float attackSpeed;
-    public float damage;
+    public float minDamage;
+    public float maxDamage;
     public float deffense;
     public float ultimateCD;
     public Sprite ultimateImage;

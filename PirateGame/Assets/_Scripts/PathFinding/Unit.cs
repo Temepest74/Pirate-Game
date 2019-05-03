@@ -42,6 +42,7 @@ public class Unit : MonoBehaviour
 
     private void Update()
     {
+
         FindNearestTarget();
     }
 
@@ -128,13 +129,13 @@ public class Unit : MonoBehaviour
         }
     }
 
-    public void OnDrawGizmos()
+    /*public void OnDrawGizmos()
     {
         if (path != null)
         {
             path.DrawWithGizmos();
         }
-    }
+    }*/
 
     protected virtual void RotatingThePlayer(Vector3 target)
     {
@@ -171,7 +172,6 @@ public class Unit : MonoBehaviour
                 notUsable++;
             }
         }
-        // Debug.Log(raycastHit2Ds.Length);
         if (raycastHit2Ds.Length > 1 && raycastHit2Ds.Length != notUsable)
         {
             StopCoroutine("SetTarget");
@@ -207,6 +207,14 @@ public class Unit : MonoBehaviour
         if (target?.gameObject.GetComponent<IEntityData>()?.GetEntityData().isDead == true)
         {
             StartCoroutine("SetTarget");
+            return;
+        }
+        if(target?.gameObject.GetComponent<IEntityData>() != null)
+        {
+           if(Mathf.Abs( Vector3.Distance(transform.position, target.position))> 7)
+            {
+                StartCoroutine("SetTarget");
+            }
         }
     }
 
