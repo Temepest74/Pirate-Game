@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 114325458398358306}
   - component: {fileID: 165435065}
   - component: {fileID: 2465620485030810666}
+  - component: {fileID: 152060549928873597}
   m_Layer: 11
   m_Name: White Ship
   m_TagString: Player
@@ -183,3 +184,15 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 257ff02a55cdb4c35b9c082c8ba4d1a9, type: 3}
     deadSprite: {fileID: 21300000, guid: bb20b7ca1da3b44418d945fd7eee210b, type: 3}
   continousAttack: 0
+--- !u!114 &152060549928873597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573309792391360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3869fb4f4de9438e9b719f0bb8e67ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
