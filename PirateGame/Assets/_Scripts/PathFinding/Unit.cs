@@ -47,9 +47,11 @@ public class Unit : MonoBehaviour
 
     public void OnPathFound (Vector3[] waipoints, bool pathSuccesful)
     {
+        Debug.Log("OnPathFound");
         //check this for stopping path
         if (pathSuccesful && target != null && gameObject.activeSelf)
         {
+            Debug.Log("pathSuccesfuly");
             path = new Path (waipoints, transform.position, turnDst, stoppingDistance);
             StopCoroutine ("FollowPath");
             StartCoroutine ("FollowPath");
@@ -58,6 +60,7 @@ public class Unit : MonoBehaviour
 
     IEnumerator UpdatePath ()
     {
+        Debug.Log("UpdatePath");
         if (Time.timeSinceLevelLoad < .3f)
         {
             yield return new WaitForSeconds (.3f);
@@ -79,6 +82,7 @@ public class Unit : MonoBehaviour
 
     IEnumerator FollowPath ()
     {
+        Debug.Log("FollowPath");
         //check
         if (!gameObject.GetComponent<IEntityData> ().GetEntityData ().isDead || gameObject.GetComponent<IEntityData> () == null)
         {
@@ -130,6 +134,7 @@ public class Unit : MonoBehaviour
 
     public void OnDrawGizmos()
     {
+        Debug.Log("PathDrawing");
         if (path != null)
         {
             path.DrawWithGizmos();
@@ -219,6 +224,7 @@ public class Unit : MonoBehaviour
 
     private IEnumerator SetTarget ()
     {
+        Debug.Log("SetTarget");
         while (true)
         {
             transformOld = transform;

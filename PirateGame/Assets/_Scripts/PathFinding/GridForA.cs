@@ -30,8 +30,8 @@ public class GridForA : MonoBehaviour
 
         foreach (TerrainType region in walkingRegions)
         {
-            walkableMask.value |= region.terrainMask; // |- bitwise OR
-            walkableRegionsDictionary.Add ((int) Mathf.Log (region.terrainMask.value, 2), region.terrainMask.value);
+            walkableMask.value |= region.terrainMask.value; // |- bitwise OR
+            walkableRegionsDictionary.Add ((int) Mathf.Log (region.terrainMask.value, 2), region.terrainPenalty);
         }
         CreateGrid ();
     }
