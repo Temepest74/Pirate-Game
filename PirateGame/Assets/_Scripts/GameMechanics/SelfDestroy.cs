@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,8 +8,8 @@ public class SelfDestroy : MonoBehaviour
     public bool onStartDestroy = true;
     void Start()
     {
-        if(onStartDestroy)
-        Destroy(gameObject, destroyTime);
+        if (onStartDestroy)
+            Destroy(gameObject, destroyTime);
     }
     public void DestroyNow()
     {

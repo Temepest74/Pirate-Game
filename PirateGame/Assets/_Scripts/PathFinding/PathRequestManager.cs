@@ -1,53 +1,52 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
+using UnityEngine;
 
 public class PathRequestManager : MonoBehaviour
 {
-    Queue<PathResult> results = new Queue<PathResult>();
+    Queue<PathResult> results = new Queue<PathResult> ();
 
     static PathRequestManager instance;
     PathFinding pathFinding;
 
-
-    private void Awake()
+    private void Awake ()
     {
         instance = this;
-        pathFinding = GetComponent<PathFinding>();
+        pathFinding = GetComponent<PathFinding> ();
     }
 
-    private void Update()
+    private void Update ()
     {
-        if(results.Count > 0)
+        if (results.Count > 0)
         {
             int itemsInQueue = results.Count;
-            lock(results)
+            lock (results)
             {
                 for (int i = 0; i < itemsInQueue; i++)
                 {
-                    PathResult result = results.Dequeue();
-                    result.callback(result.path, result.succes);
+                    PathResult result = results.Dequeue ();
+                    result.callback (result.path, result.succes);
                 }
             }
         }
     }
 
-    public static void RequestPath(PathRequest request)
+    public static void RequestPath (PathRequest request)
     {
         ThreadStart threadStart = delegate
         {
-            instance.pathFinding.FindPath(request, instance.FinishProcessingPath);
+            instance.pathFinding.FindPath (request, instance.FinishProcessingPath);
         };
-        threadStart.Invoke();
+        threadStart.Invoke ();
     }
 
-    public void FinishProcessingPath(PathResult result)
+    public void FinishProcessingPath (PathResult result)
     {
         lock (results)
         {
-            results.Enqueue(result);
+            results.Enqueue (result);
         }
     }
 }
@@ -58,7 +57,7 @@ public struct PathResult
     public bool succes;
     public Action<Vector3[], bool> callback;
 
-    public PathResult(Vector3[] path, bool succes, Action<Vector3[], bool> callback)
+    public PathResult (Vector3[] path, bool succes, Action<Vector3[], bool> callback)
     {
         this.path = path;
         this.succes = succes;
@@ -72,7 +71,7 @@ public struct PathRequest
     public Vector3 pathEnd;
     public Action<Vector3[], bool> callback;
 
-    public PathRequest(Vector3 _start, Vector3 _end, Action<Vector3[], bool> _callback)
+    public PathRequest (Vector3 _start, Vector3 _end, Action<Vector3[], bool> _callback)
     {
         pathStart = _start;
         pathEnd = _end;

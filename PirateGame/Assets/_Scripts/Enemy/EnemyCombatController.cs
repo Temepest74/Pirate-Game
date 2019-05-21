@@ -1,12 +1,11 @@
-﻿using System.Collections;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-
 
 public class EnemyCombatController : MonoBehaviour, IEntityData
 {
-    public EntityData GetEntityData()
+    public EntityData GetEntityData ()
     {
         return entityData;
     }
@@ -19,23 +18,23 @@ public class EnemyCombatController : MonoBehaviour, IEntityData
     [HideInInspector]
     public bool continousAttack;
 
-    private void Start()
+    private void Start ()
     {
-        unit = GetComponent<Unit>();
+        unit = GetComponent<Unit> ();
     }
 
-    private void OnValidate()
+    private void OnValidate ()
     {
-        OnDamageReceive();
+        OnDamageReceive ();
     }
 
-    private void Update()
+    private void Update ()
     {
         if (unit.target == null)
             return;
-        if (unit.target?.GetComponent<IEntityData>() != null)
+        if (unit.target?.GetComponent<IEntityData> () != null)
         {
-            float distance = new Vector3(unit.target.transform.position.x - transform.position.x, unit.target.transform.position.y - transform.position.y, 0).sqrMagnitude;
+            float distance = new Vector3 (unit.target.transform.position.x - transform.position.x, unit.target.transform.position.y - transform.position.y, 0).sqrMagnitude;
             if (continousAttack == true || distance <= entityData.range * entityData.range)
             {
                 fireRate = entityData.attackSpeed;
@@ -45,9 +44,9 @@ public class EnemyCombatController : MonoBehaviour, IEntityData
                     nextFire = Time.time + fireRate;
                     if (distance <= entityData.range * entityData.range)
                     {
-                        GameObject obj = Instantiate(entityData.projectile, transform.position, Quaternion.identity) as GameObject;
-                        obj.transform.up = new Vector3(unit.target.transform.position.x - transform.position.x, unit.target.transform.position.y - transform.position.y, 0);
-                        obj.GetComponent<CannonballController>().shotter = gameObject;
+                        GameObject obj = Instantiate (entityData.projectile, transform.position, Quaternion.identity) as GameObject;
+                        obj.transform.up = new Vector3 (unit.target.transform.position.x - transform.position.x, unit.target.transform.position.y - transform.position.y, 0);
+                        obj.GetComponent<CannonballController> ().shotter = gameObject;
                     }
                     else
                     {
@@ -60,29 +59,31 @@ public class EnemyCombatController : MonoBehaviour, IEntityData
         {
             continousAttack = false;
         }
+        GetEntityData().inCombat = continousAttack;
+        GetEntityData().target = unit.target;
     }
 
-    public void OnDamageReceive(float damage = 0)
+    public void OnDamageReceive (float damage = 0)
     {
-        entityData.OnDamageReceive(gameObject, damage);
+        entityData.OnDamageReceive (gameObject, damage);
         if (entityData.currentHealth <= 0)
         {
-            gameObject.GetComponent<Unit>().target.GetComponent<SelfDestroy>()?.DestroyNow();
-            gameObject.GetComponent<Unit>().enabled = false;
-            gameObject.GetComponent<EnemyCombatController>().enabled = false;
+            gameObject.GetComponent<Unit> ().target.GetComponent<SelfDestroy> ()?.DestroyNow ();
+            gameObject.GetComponent<Unit> ().enabled = false;
+            gameObject.GetComponent<EnemyCombatController> ().enabled = false;
         }
     }
 
-    public void CallDisableObject()
+    public void CallDisableObject ()
     {
-        if(Application.isPlaying)
-        StartCoroutine(DisableObject(2f, () => gameObject.SetActive(false)));
+        if (Application.isPlaying)
+            StartCoroutine (DisableObject (2f, () => gameObject.SetActive (false)));
     }
 
-    public IEnumerator DisableObject(float seconds, Action action)
+    public IEnumerator DisableObject (float seconds, Action action)
     {
-        yield return new WaitForSeconds(seconds);
-        action.Invoke();
+        yield return new WaitForSeconds (seconds);
+        action.Invoke ();
     }
 
 }

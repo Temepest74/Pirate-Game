@@ -134,7 +134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cd14bda17d9c4477bc4a1b50bff3bd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
   rotationSpeed: 3
   brake: 0.05
 --- !u!114 &165435065
@@ -171,7 +170,7 @@ MonoBehaviour:
     deffense: 10
     ultimateCD: 15
     ultimateImage: {fileID: 21300000, guid: da5f79080add34f479e55c786429b26f, type: 3}
-    ultimateDescription: Increase the maximum health with 60 percent
+    ultimateDescription: Increase the maximum health with 20 percent for 5 seconds
     isDead: 0
     isEliminated: 0
     ultimateImageHolder: {fileID: 0}
@@ -183,6 +182,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 49b2d0999b9424414a1cc083931a28c5, type: 3}
     - {fileID: 21300000, guid: 257ff02a55cdb4c35b9c082c8ba4d1a9, type: 3}
     deadSprite: {fileID: 21300000, guid: bb20b7ca1da3b44418d945fd7eee210b, type: 3}
+    inCombat: 0
+    target: {fileID: 0}
   continousAttack: 0
 --- !u!114 &152060549928873597
 MonoBehaviour:
@@ -196,3 +197,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3869fb4f4de9438e9b719f0bb8e67ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  barrel: {fileID: 90343463767437914, guid: 2b5d239f905b449b184c6548de8fdcca, type: 3}
+  cdColor: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}

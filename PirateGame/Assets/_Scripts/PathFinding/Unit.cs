@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,71 +28,70 @@ public class Unit : MonoBehaviour
 
     private bool setRandomTarget;
 
-    private void Awake()
+    private void Awake ()
     {
-        grid = GameObject.FindGameObjectWithTag("PathfindingHolder").GetComponent<GridForA>();
+        grid = GameObject.FindGameObjectWithTag ("PathfindingHolder").GetComponent<GridForA> ();
     }
 
-    private void Start()
+    private void Start ()
     {
-        Random.InitState((int)System.DateTime.Now.Ticks);
-        StartCoroutine("SetTarget");
-        StartCoroutine("UpdatePath");
+        Random.InitState ((int) System.DateTime.Now.Ticks);
+        StartCoroutine ("SetTarget");
+        StartCoroutine ("UpdatePath");
     }
 
-    private void Update()
+    private void Update ()
     {
-
-        FindNearestTarget();
+        FindNearestTarget ();
     }
 
-    public void OnPathFound(Vector3[] waipoints, bool pathSuccesful)
+    public void OnPathFound (Vector3[] waipoints, bool pathSuccesful)
     {
         //check this for stopping path
         if (pathSuccesful && target != null && gameObject.activeSelf)
         {
-            path = new Path(waipoints, transform.position, turnDst, stoppingDistance);
-            StopCoroutine("FollowPath");
-            StartCoroutine("FollowPath");
+            path = new Path (waipoints, transform.position, turnDst, stoppingDistance);
+            StopCoroutine ("FollowPath");
+            StartCoroutine ("FollowPath");
         }
     }
 
-    IEnumerator UpdatePath()
+    IEnumerator UpdatePath ()
     {
         if (Time.timeSinceLevelLoad < .3f)
         {
-            yield return new WaitForSeconds(.3f);
+            yield return new WaitForSeconds (.3f);
         }
-        PathRequestManager.RequestPath(new PathRequest(transform.position, target.position, OnPathFound));
+        PathRequestManager.RequestPath (new PathRequest (transform.position, target.position, OnPathFound));
         float sqrtMoveTreshhold = pathUpdateMoveTreshhold * pathUpdateMoveTreshhold;
         Vector3 targetPosOld = target.position;
         while (true)
         {
-            yield return new WaitForSeconds(minPathUpdateTime);
+            yield return new WaitForSeconds (minPathUpdateTime);
             if (target != null)
                 if ((target.position - targetPosOld).sqrMagnitude > sqrtMoveTreshhold)
                 {
-                    PathRequestManager.RequestPath(new PathRequest(transform.position, target.position, OnPathFound));
+                    PathRequestManager.RequestPath (new PathRequest (transform.position, target.position, OnPathFound));
                     targetPosOld = target.position;
                 }
         }
     }
 
-    IEnumerator FollowPath()
+    IEnumerator FollowPath ()
     {
         //check
-        if (!gameObject.GetComponent<IEntityData>().GetEntityData().isDead || gameObject.GetComponent<IEntityData>() == null)
+        if (!gameObject.GetComponent<IEntityData> ().GetEntityData ().isDead || gameObject.GetComponent<IEntityData> () == null)
         {
             bool followingPath = true;
             int pathIndex = 0;
 
-            RotatingThePlayer(path.lookPoints[0]);
+            RotatingThePlayer (path.lookPoints[0]);
 
             float speedPercent = 1f;
-            while (followingPath && !gameObject.GetComponent<IEntityData>().GetEntityData().isDead || gameObject.GetComponent<IEntityData>() == null)
+            while (followingPath && !gameObject.GetComponent<IEntityData> ().GetEntityData ().isDead || gameObject.GetComponent<IEntityData> () == null)
             {
-                Vector2 pos2D = new Vector2(transform.position.x, transform.position.y);
-                while (path.turnBoundaries[pathIndex].HasCrossedLine(pos2D))
+                Vector2 pos2D = new Vector2 (transform.position.x, transform.position.y);
+                while (path.turnBoundaries[pathIndex].HasCrossedLine (pos2D))
                 {
                     if (pathIndex == path.finishLineIndex)
                     {
@@ -109,18 +108,18 @@ public class Unit : MonoBehaviour
                 {
                     if (pathIndex >= path.slowDownIndex && stoppingDistance > 0)
                     {
-                        speedPercent = Mathf.Clamp01(path.turnBoundaries[path.finishLineIndex].DistanceFromPoint(pos2D) / stoppingDistance);
+                        speedPercent = Mathf.Clamp01 (path.turnBoundaries[path.finishLineIndex].DistanceFromPoint (pos2D) / stoppingDistance);
                         if (speedPercent < .01f)
                         {
                             followingPath = false;
                         }
                     }
-                    RotatingThePlayer(path.lookPoints[pathIndex]);
+                    RotatingThePlayer (path.lookPoints[pathIndex]);
                     if (transform != null && target != null)
                     {
-                        if (Mathf.Abs(angleDifferenceToTarget) < angleDifferenceToTargetTreshhold && (target.position - transform.position).sqrMagnitude > noMoreMovementDistance * noMoreMovementDistance)
+                        if (Mathf.Abs (angleDifferenceToTarget) < angleDifferenceToTargetTreshhold && (target.position - transform.position).sqrMagnitude > noMoreMovementDistance * noMoreMovementDistance)
                         {
-                            transform.Translate(Vector3.up * speed * Time.deltaTime * speedPercent, Space.Self);//change it when ballancing the game
+                            transform.Translate (Vector3.up * speed * Time.deltaTime * speedPercent, Space.Self); //change it when ballancing the game
                         }
                     }
                 }
@@ -129,44 +128,44 @@ public class Unit : MonoBehaviour
         }
     }
 
-    /*public void OnDrawGizmos()
+    public void OnDrawGizmos()
     {
         if (path != null)
         {
             path.DrawWithGizmos();
         }
-    }*/
+    }
 
-    protected virtual void RotatingThePlayer(Vector3 target)
+    protected virtual void RotatingThePlayer (Vector3 target)
     {
         Vector3 direction = target - transform.position;
-        angleDifferenceToTarget = Vector2.SignedAngle(transform.up, direction);
+        angleDifferenceToTarget = Vector2.SignedAngle (transform.up, direction);
         //Flattens difference to -1f/1f * delta * turn rate
         if (angleDifferenceToTarget < -1 || angleDifferenceToTarget > 1)
         {
-            float rotationChange = Mathf.Sign(angleDifferenceToTarget) * Time.deltaTime * turnSpeed;
+            float rotationChange = Mathf.Sign (angleDifferenceToTarget) * Time.deltaTime * turnSpeed;
             //Apply rotation
             Vector3 localEulerAngles = transform.localEulerAngles;
             localEulerAngles.z += rotationChange;
-            localEulerAngles.Set(0, 0, localEulerAngles.z);
+            localEulerAngles.Set (0, 0, localEulerAngles.z);
             transform.localEulerAngles = localEulerAngles;
         }
     }
 
-    private void FindNearestTarget()
+    private void FindNearestTarget ()
     {
-        RaycastHit2D[] raycastHit2Ds = Physics2D.BoxCastAll(
-            new Vector2(transform.position.x, transform.position.y),
-            new Vector2(targetCheckSizeX, targetCheckSizeY),
+        RaycastHit2D[] raycastHit2Ds = Physics2D.BoxCastAll (
+            new Vector2 (transform.position.x, transform.position.y),
+            new Vector2 (targetCheckSizeX, targetCheckSizeY),
             0,
             Vector2.zero,
             Mathf.Infinity,
             layer.value
-            );
+        );
         int notUsable = 0;
         foreach (RaycastHit2D item in raycastHit2Ds)
         {
-            if(item.collider.gameObject.GetComponent<IEntityData>().GetEntityData().isDead ||
+            if (item.collider.gameObject.GetComponent<IEntityData> ().GetEntityData ().isDead ||
                 item.collider.gameObject == gameObject)
             {
                 notUsable++;
@@ -174,19 +173,19 @@ public class Unit : MonoBehaviour
         }
         if (raycastHit2Ds.Length > 1 && raycastHit2Ds.Length != notUsable)
         {
-            StopCoroutine("SetTarget");
+            StopCoroutine ("SetTarget");
             float minDist = Mathf.Infinity;
             foreach (RaycastHit2D raycastHit in raycastHit2Ds)
             {
-                if (target != null && target.gameObject.GetComponent<IEntityData>() == null)
+                if (target != null && target.gameObject.GetComponent<IEntityData> () == null)
                 {
-                    target.gameObject.GetComponent<SelfDestroy>().DestroyNow();
+                    target.gameObject.GetComponent<SelfDestroy> ().DestroyNow ();
                 }
                 if (raycastHit.collider.gameObject != gameObject &&
-                    raycastHit.collider.gameObject.GetComponent<IEntityData>() != null &&
-                    raycastHit.collider.gameObject.GetComponent<IEntityData>().GetEntityData().isDead == false)
+                    raycastHit.collider.gameObject.GetComponent<IEntityData> () != null &&
+                    raycastHit.collider.gameObject.GetComponent<IEntityData> ().GetEntityData ().isDead == false)
                 {
-                    float dist = Mathf.Abs(Vector3.Distance(raycastHit.collider.gameObject.transform.position, transform.position));
+                    float dist = Mathf.Abs (Vector3.Distance (raycastHit.collider.gameObject.transform.position, transform.position));
                     if (dist < minDist)
                     {
                         minDist = dist;
@@ -198,64 +197,63 @@ public class Unit : MonoBehaviour
                     continue;
                 }
             }
-        }
-        if (target == null)
-        {
-            StartCoroutine("SetTarget");
-            return;
-        }
-        if (target?.gameObject.GetComponent<IEntityData>()?.GetEntityData().isDead == true)
-        {
-            StartCoroutine("SetTarget");
-            return;
-        }
-        if(target?.gameObject.GetComponent<IEntityData>() != null)
-        {
-           if(Mathf.Abs( Vector3.Distance(transform.position, target.position))> 7)
+            if (target == null)
             {
-                StartCoroutine("SetTarget");
+                StartCoroutine ("SetTarget");
+                return;
             }
+            if (target?.gameObject.GetComponent<IEntityData> () != null)
+            {
+                if (Mathf.Abs (Vector3.Distance (transform.position, target.position)) > 7)
+                {
+                    StartCoroutine ("SetTarget");
+                }
+            }
+        }
+        if (target?.gameObject.GetComponent<IEntityData> ()?.GetEntityData ().isDead == true)
+        {
+            StartCoroutine ("SetTarget");
+            return;
         }
     }
 
-    private IEnumerator SetTarget()
+    private IEnumerator SetTarget ()
     {
         while (true)
         {
             transformOld = transform;
-            if (target != null && target.gameObject.GetComponent<IEntityData>() == null)
+            if (target != null && target.gameObject.GetComponent<IEntityData> () == null)
             {
-                target.gameObject.GetComponent<SelfDestroy>().DestroyNow();
+                target.gameObject.GetComponent<SelfDestroy> ().DestroyNow ();
             }
-            target = new GameObject().transform;
-            target.name = string.Concat(gameObject.name, "target");
-            target.gameObject.AddComponent<SelfDestroy>();
-            target.gameObject.GetComponent<SelfDestroy>().onStartDestroy = false;
-            target.gameObject.GetComponent<SelfDestroy>().destroyTime = 0;
+            target = new GameObject ().transform;
+            target.name = string.Concat (gameObject.name, "target");
+            target.gameObject.AddComponent<SelfDestroy> ();
+            target.gameObject.GetComponent<SelfDestroy> ().onStartDestroy = false;
+            target.gameObject.GetComponent<SelfDestroy> ().destroyTime = 0;
             if (transformOld.position == transform.position)
             {
                 int x;
                 int y;
                 while (true)
                 {
-                    x = (int)Random.Range(0, grid.gridSizeX - 1);
-                    y = (int)Random.Range(0, grid.gridSizeY - 1);
+                    x = (int) Random.Range (0, grid.gridSizeX - 1);
+                    y = (int) Random.Range (0, grid.gridSizeY - 1);
                     if (grid.grid[x, y].walkable)
                     {
                         break;
                     }
                 }
                 target.position = grid.grid[x, y].worldPosition;
-                RotatingThePlayer(target.position);
+                RotatingThePlayer (target.position);
             }
             transformOld.position = transform.position;
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds (5);
         }
     }
 
-    private float GetDistance(GameObject obj)
+    private float GetDistance (GameObject obj)
     {
-        return Mathf.Abs((transform.position - obj.transform.position).sqrMagnitude);
+        return Mathf.Abs ((transform.position - obj.transform.position).sqrMagnitude);
     }
 }
-

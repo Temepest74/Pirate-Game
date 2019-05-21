@@ -180,7 +180,9 @@ MonoBehaviour:
     deffense: 10
     ultimateCD: 15
     ultimateImage: {fileID: 21300000, guid: da5f79080add34f479e55c786429b26f, type: 3}
-    ultimateDescription: ' Increase the maximum health with 60 percent'
+    ultimateDescription: ' Increase the maximum health with 60 percent  Increase the
+      maximum health with 60 percent  Increase the maximum health with 20 percent
+      for 5 seconds'
     isDead: 0
     isEliminated: 0
     ultimateImageHolder: {fileID: 0}

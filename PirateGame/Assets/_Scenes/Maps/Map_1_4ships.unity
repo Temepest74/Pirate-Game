@@ -192,10 +192,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 17, y: 17}
-      - {x: -16, y: 17}
-      - {x: -16, y: -16}
-      - {x: 17, y: -16}
+    - - {x: 16, y: 16}
+      - {x: -15, y: 16}
+      - {x: -15, y: -15}
+      - {x: 16, y: -15}
 --- !u!4 &112405739
 Transform:
   m_ObjectHideFlags: 0
@@ -254,7 +254,7 @@ MonoBehaviour:
     terrainPenalty: 1
   gridSizeX: 0
   gridSizeY: 0
-  obstacleProximityPenalty: 50
+  obstacleProximityPenalty: 10
 --- !u!4 &331668581
 Transform:
   m_ObjectHideFlags: 0
@@ -408,7 +408,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.941818, y: 13, z: -10}
+  m_LocalPosition: {x: -7, y: 12, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -852,7 +852,7 @@ MonoBehaviour:
   - {fileID: 7402682542647009758, guid: 8c10eed4d438d4d5a95197ff20b483ed, type: 3}
   - {fileID: 1573309792391360, guid: a976041e619c04c8a8eb35b799b61c02, type: 3}
   - {fileID: 110491583858268443, guid: e8afcac891fce42d392ff13d6b31a943, type: 3}
-  shipType: 0
+  shipType: 3
 --- !u!4 &1153583493
 Transform:
   m_ObjectHideFlags: 0
@@ -5172,6 +5172,7 @@ TilemapCollider2D:
   m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
 --- !u!66 &1441484785
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -8483,6 +8484,7 @@ CompositeCollider2D:
       - {x: -5.9375, y: -16}
       - {x: -4.015625, y: -16}
   m_VertexDistance: 0.0005
+  m_OffsetDistance: 0.000005
 --- !u!50 &1441484786
 Rigidbody2D:
   serializedVersion: 4
@@ -22507,6 +22509,7 @@ TilemapCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
 --- !u!1 &1666932749
 GameObject:
   m_ObjectHideFlags: 0

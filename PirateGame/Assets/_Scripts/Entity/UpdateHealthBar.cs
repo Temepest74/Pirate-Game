@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,15 +12,15 @@ public class UpdateHealthBar : MonoBehaviour
     [SerializeField]
     private float maxHealth;
 
-    private void Update()
+    private void Update ()
     {
-        currentHealth = entityData.GetEntityData().currentHealth;
-        maxHealth = entityData.GetEntityData().maxHealth;
+        currentHealth = entityData.GetEntityData ().currentHealth;
+        maxHealth = entityData.GetEntityData ().maxHealth;
         float proccentHealth = currentHealth / maxHealth;
-        transform.localScale = new Vector3(proccentHealth, transform.localScale.y, transform.localScale.y);
-        if(currentHealth <= 0)
+        transform.localScale = new Vector3 (proccentHealth, transform.localScale.y, transform.localScale.y);
+        if (currentHealth <= 0)
         {
-            Destroy(healthBar);
+            Destroy (healthBar);
         }
     }
 }

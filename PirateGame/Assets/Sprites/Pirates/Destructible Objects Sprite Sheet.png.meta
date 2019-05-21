@@ -1,10 +1,12 @@
 fileFormatVersion: 2
 guid: 089d85fe171084976853bef7434cdfdc
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Destructible Objects Sprite Sheet_0
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: Destructible Objects Sprite Sheet_0
   externalObjects: {}
-  serializedVersion: 9
+  serializedVersion: 10
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -32,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -122,6 +124,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: cf538af0c8d9e4f24b2f783b0543e294
+      internalID: 21300000
       vertices: []
       indices: 
       edges: []
@@ -130,10 +133,12 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 470fddb4f93d74eea8c949a1c0af6e54
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
+    secondaryTextures: []
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

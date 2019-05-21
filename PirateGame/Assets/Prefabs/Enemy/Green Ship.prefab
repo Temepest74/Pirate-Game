@@ -12,76 +12,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Green Ship
       objectReference: {fileID: 0}
-    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
-        type: 3}
-      propertyPath: damageShipSprites.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: 5bb561197a9a64916bdaff3ab26e4a33,
-        type: 3}
-    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
-        type: 3}
-      propertyPath: damageShipSprites.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: 29078c2c1ed0d4907a4624b2339798bc,
-        type: 3}
-    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
-        type: 3}
-      propertyPath: damageShipSprites.Array.data[2]
-      value: 
-      objectReference: {fileID: 21300000, guid: 84762c1a1dcdd4a4294fbac0f673fd5d,
-        type: 3}
-    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
-        type: 3}
-      propertyPath: deadSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 4d83d3d3d2d394656a22668dee442376,
-        type: 3}
-    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
-        type: 3}
-      propertyPath: ultimateDescription
-      value: 50% damage up
-      objectReference: {fileID: 0}
-    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
-        type: 3}
-      propertyPath: entityData.ultimateImage
-      value: 
-      objectReference: {fileID: 21300006, guid: da5f79080add34f479e55c786429b26f,
-        type: 3}
-    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
-        type: 3}
-      propertyPath: entityData.ultimateDescription
-      value: 50% damage up
-      objectReference: {fileID: 0}
-    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
-        type: 3}
-      propertyPath: entityData.damagedSpries.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: 5bb561197a9a64916bdaff3ab26e4a33,
-        type: 3}
-    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
-        type: 3}
-      propertyPath: entityData.damagedSpries.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: 29078c2c1ed0d4907a4624b2339798bc,
-        type: 3}
-    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
-        type: 3}
-      propertyPath: entityData.damagedSpries.Array.data[2]
-      value: 
-      objectReference: {fileID: 21300000, guid: 84762c1a1dcdd4a4294fbac0f673fd5d,
-        type: 3}
-    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
-        type: 3}
-      propertyPath: entityData.deadSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 4d83d3d3d2d394656a22668dee442376,
-        type: 3}
-    - target: {fileID: 515780444385694788, guid: 78c3155fb879e4d33a43a4692a9b46d6,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 84762c1a1dcdd4a4294fbac0f673fd5d,
-        type: 3}
     - target: {fileID: 515780444385694795, guid: 78c3155fb879e4d33a43a4692a9b46d6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -137,5 +67,75 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 515780444385694788, guid: 78c3155fb879e4d33a43a4692a9b46d6,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 84762c1a1dcdd4a4294fbac0f673fd5d,
+        type: 3}
+    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
+        type: 3}
+      propertyPath: damageShipSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 5bb561197a9a64916bdaff3ab26e4a33,
+        type: 3}
+    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
+        type: 3}
+      propertyPath: damageShipSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 29078c2c1ed0d4907a4624b2339798bc,
+        type: 3}
+    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
+        type: 3}
+      propertyPath: damageShipSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 84762c1a1dcdd4a4294fbac0f673fd5d,
+        type: 3}
+    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
+        type: 3}
+      propertyPath: deadSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4d83d3d3d2d394656a22668dee442376,
+        type: 3}
+    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
+        type: 3}
+      propertyPath: ultimateDescription
+      value: 50% damage up
+      objectReference: {fileID: 0}
+    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
+        type: 3}
+      propertyPath: entityData.ultimateImage
+      value: 
+      objectReference: {fileID: 21300006, guid: da5f79080add34f479e55c786429b26f,
+        type: 3}
+    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
+        type: 3}
+      propertyPath: entityData.ultimateDescription
+      value: 50% damage up for 5 seconds
+      objectReference: {fileID: 0}
+    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
+        type: 3}
+      propertyPath: entityData.damagedSpries.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 5bb561197a9a64916bdaff3ab26e4a33,
+        type: 3}
+    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
+        type: 3}
+      propertyPath: entityData.damagedSpries.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 29078c2c1ed0d4907a4624b2339798bc,
+        type: 3}
+    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
+        type: 3}
+      propertyPath: entityData.damagedSpries.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 84762c1a1dcdd4a4294fbac0f673fd5d,
+        type: 3}
+    - target: {fileID: 1282450668570048858, guid: 78c3155fb879e4d33a43a4692a9b46d6,
+        type: 3}
+      propertyPath: entityData.deadSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4d83d3d3d2d394656a22668dee442376,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78c3155fb879e4d33a43a4692a9b46d6, type: 3}

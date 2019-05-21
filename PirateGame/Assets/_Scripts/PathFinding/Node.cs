@@ -1,10 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Node : IHeapItem<Node>
 {
-	public bool walkable;
+    public bool walkable;
     public Vector3 worldPosition;
 
     public int gridX;
@@ -18,7 +18,7 @@ public class Node : IHeapItem<Node>
 
     int heapIndex;
 
-    public Node(bool _walkable, Vector3 _worldPosition, int _gridX, int _gridY, int _movementPenalty)
+    public Node (bool _walkable, Vector3 _worldPosition, int _gridX, int _gridY, int _movementPenalty)
     {
         walkable = _walkable;
         worldPosition = _worldPosition;
@@ -47,12 +47,12 @@ public class Node : IHeapItem<Node>
         }
     }
 
-    public int CompareTo(Node nodeToCompare)
+    public int CompareTo (Node nodeToCompare)
     {
-        int compare = fCost.CompareTo(nodeToCompare.fCost);
-        if(compare == 0)
+        int compare = fCost.CompareTo (nodeToCompare.fCost);
+        if (compare == 0)
         {
-            compare = hCost.CompareTo(nodeToCompare.hCost);
+            compare = hCost.CompareTo (nodeToCompare.hCost);
         }
         return -compare;
     }

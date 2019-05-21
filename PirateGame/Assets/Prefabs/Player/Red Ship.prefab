@@ -140,7 +140,8 @@ PrefabInstance:
     - target: {fileID: 2465620485030810666, guid: a976041e619c04c8a8eb35b799b61c02,
         type: 3}
       propertyPath: entityData.ultimateDescription
-      value: Give AOE Damage worth 70% procent
+      value: Launch a projectile who gives 100% damage and 30% damage over time for
+        5 seconds
       objectReference: {fileID: 0}
     - target: {fileID: 4465004063329337392, guid: a976041e619c04c8a8eb35b799b61c02,
         type: 3}
